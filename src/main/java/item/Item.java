@@ -19,6 +19,6 @@ public abstract class Item {
     public  abstract double getPrecioFinal();
     public  abstract double getPeso();
 
-    public void agregarItem(Item i) { }
+    public void agregarItem(Item i)  { }
     public void eliminarItem(Item i) { }
 }
