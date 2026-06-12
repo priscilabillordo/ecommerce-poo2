@@ -9,7 +9,7 @@ public class EnvioExpress implements MetodoDeEnvio {
         this.envioExpressI = envioExpressI;
     }
 
-    public float costoDeEnvio(float precio, float peso, String direccionEnvio) {
-        return envioExpressI.calcularCosto(precio);
+    public double costoDeEnvio(double precio, double peso, String direccionEnvio) {
+        return (double) envioExpressI.calcularCosto((float) precio);
     }
 }

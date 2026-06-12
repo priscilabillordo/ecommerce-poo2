@@ -9,8 +9,7 @@ public class EnvioEstandar implements MetodoDeEnvio {
         this.correoArgentino = correoArgentino;
     }
 
-    public float costoDeEnvio(float precioTotalPedido, float peso, String direccionEnvio) {
-        //Direccion
-        return correoArgentino.estimarEnvio(peso, direccionEnvio);
+    public double costoDeEnvio(double precio, double peso, String direccionEnvio) {
+        return (double) correoArgentino.estimarEnvio((float) peso, direccionEnvio);
     }
 }

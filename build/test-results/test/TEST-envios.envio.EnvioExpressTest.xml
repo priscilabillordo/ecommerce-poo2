@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="envios.envio.EnvioExpressTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-06-12T20:04:05.786Z" hostname="alison-HP-Stream-Laptop-14-ax1xxx" time="1.9">
+<testsuite name="envios.envio.EnvioExpressTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-06-12T20:37:48.652Z" hostname="alison-HP-Stream-Laptop-14-ax1xxx" time="2.815">
   <properties/>
-  <testcase name="verificarElCostoDeEnvioExpress()" classname="envios.envio.EnvioExpressTest" time="1.866"/>
+  <testcase name="verificarElCostoDeEnvioExpress()" classname="envios.envio.EnvioExpressTest" time="2.759"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/home/alison/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.12/be4984cb6fd1ef1d11f218a648889dfda44b8a15/byte-buddy-agent-1.14.12.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning

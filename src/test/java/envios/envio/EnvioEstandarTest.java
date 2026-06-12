@@ -22,6 +22,6 @@ public class EnvioEstandarTest {
 
     @Test
     void verificarElCostoDeEnvioEstandar() {
-        assertEquals(2000F, envioEstandar.costoDeEnvio(1999, 500, "No hay direccion, se retira en sucursal"));
+        assertEquals(2000, envioEstandar.costoDeEnvio(1999, 500, "No hay direccion, se retira en sucursal"));
     }
 }

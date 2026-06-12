@@ -1,5 +1,5 @@
 package envios.envio;
 
 public interface MetodoDeEnvio {
-    public float costoDeEnvio(float precio, float peso, String direccionEnvio);
+    public double costoDeEnvio(double precio, double peso, String direccionEnvio);
 }

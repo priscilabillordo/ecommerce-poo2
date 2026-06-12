@@ -22,6 +22,6 @@ public class EnvioExpressTest {
 
     @Test
     void verificarElCostoDeEnvioExpress() {
-        assertEquals(800F, envioExpress.costoDeEnvio(500, 500, "Avenida Siempre Viva"));
+        assertEquals(800, envioExpress.costoDeEnvio(500, 500, "Avenida Siempre Viva"));
     }
 }
