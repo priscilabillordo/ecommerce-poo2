@@ -1,5 +1,3 @@
-
-
 # Wrapper (Esto SI se sube)
 !gradlew
 !gradlew.bat
@@ -11,5 +9,3 @@
 
 # Intellij IDEA
 .idea
-
-
