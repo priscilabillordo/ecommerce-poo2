@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="items.item.ProductoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-06-12T19:46:45.628Z" hostname="alison-HP-Stream-Laptop-14-ax1xxx" time="0.198">
+  <properties/>
+  <testcase name="verificarAtributosDinamicosDelProducto()" classname="items.item.ProductoTest" time="0.115"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
