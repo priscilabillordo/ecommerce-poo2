@@ -4,6 +4,7 @@ import pedido.Pedido;
 
 public class Borrador extends EstadoPedido {
 
+    /*
     @Override
     public void cargarItem(Item item, Pedido pedido){
         pedido.addItem(item);
@@ -25,4 +26,5 @@ public class Borrador extends EstadoPedido {
         pedido.setEstado(new Confirmado());
         pedido.decrementarStock();
     }
+     */
 }

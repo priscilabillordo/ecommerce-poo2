@@ -2,6 +2,7 @@ package pedido;
 
 import lombok.Getter;
 import lombok.Setter;
+import medioDePago.MedioDePago;
 import pedido.estadoPedido.EstadoPedido;
 import java.util.List;
 
@@ -10,8 +11,9 @@ import java.util.List;
 public class Pedido {
 
     private EstadoPedido estado;
+    /*
     private List<Item> items;
-    private String direccionEntrega;
+    private String direccionEntrega; // Direccion CONSULTAR
     private MetodoDeEnvio metodoDeEnvio;
     private MedioDePago medioDePago;
     // private double costo;
@@ -65,11 +67,12 @@ public class Pedido {
         this.items.remove(item);
     }
 
+
+     */
     public void decrementarStock(){
         // todo: c/item tiene que decrementar su stock
         // this.items.forEach(i -> i.decrementarStock())
     }
-
     public void reponerStock(){
         // todo
         // Confirmado --> Cancelado
@@ -83,5 +86,4 @@ public class Pedido {
         // Enviado --> Cancelado
         //   - reembolsa solo costo de prods
     }
-
 }
