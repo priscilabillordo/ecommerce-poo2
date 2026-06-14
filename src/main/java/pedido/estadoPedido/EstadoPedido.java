@@ -1,10 +1,10 @@
 package pedido.estadoPedido;
 
+import items.item.Item;
 import pedido.Pedido;
 
 public abstract class EstadoPedido {
 
-    /*
     public void cargarItem(Item item, Pedido pedido){
         // todo: el unico que hace esto es Borrador
     }
@@ -12,7 +12,7 @@ public abstract class EstadoPedido {
     public void quitarItem(Item item, Pedido pedido){
         // todo: el unico que hace esto es Borrador
     }
-*/
+
     public void confirmarPedido(Pedido pedido){
         // todo: lo hacen Borrador
     }
