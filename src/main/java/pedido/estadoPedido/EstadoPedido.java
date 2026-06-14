@@ -1,5 +1,6 @@
 package pedido.estadoPedido;
 
+import items.item.Item;
 import pedido.Pedido;
 
 public abstract class EstadoPedido {

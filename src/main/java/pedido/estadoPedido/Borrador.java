@@ -1,5 +1,6 @@
 package pedido.estadoPedido;
 
+import items.item.Item;
 import pedido.Pedido;
 
 public class Borrador extends EstadoPedido {
@@ -21,8 +22,8 @@ public class Borrador extends EstadoPedido {
 
     @Override
     public void confirmarPedido(Pedido pedido){
-
         pedido.setEstado(new Confirmado());
         pedido.decrementarStock();
     }
+
 }
