@@ -1,5 +1,6 @@
 package pedido.estadoPedido;
 
+import item.Item;
 import pedido.Pedido;
 
 public class Borrador extends EstadoPedido {

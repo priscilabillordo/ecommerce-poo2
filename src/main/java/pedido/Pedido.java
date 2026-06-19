@@ -2,13 +2,13 @@ package pedido;
 
 import lombok.Getter;
 import lombok.Setter;
+import medioDePago.MedioDePago;
 import pedido.estadoPedido.EstadoPedido;
 
 import item.Item;
-import item.item.Item;
 import metodoDeEnvio.MetodoDeEnvio;
-import util.ArrayList;
-import util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -89,5 +89,7 @@ public class Pedido {
         //   - reembolsa solo costo de prods
     }
 
-
+    public double costoDeItems() {
+        return 0;
+    }
 }
