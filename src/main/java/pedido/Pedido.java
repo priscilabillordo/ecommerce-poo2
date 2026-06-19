@@ -3,7 +3,12 @@ package pedido;
 import lombok.Getter;
 import lombok.Setter;
 import pedido.estadoPedido.EstadoPedido;
-import java.util.List;
+
+import item.Item;
+import item.item.Item;
+import metodoDeEnvio.MetodoDeEnvio;
+import util.ArrayList;
+import util.List;
 
 @Setter
 @Getter
@@ -18,7 +23,7 @@ public class Pedido {
 
     public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio){
 
-        this.items = new List<Item>();
+        this.items = new ArrayList<Item>();
         this.direccionEntrega = direccionEntrega;
         this.medioDePago = medioDePago;
         this.metodoDeEnvio = metodoDeEnvio;
@@ -83,5 +88,6 @@ public class Pedido {
         // Enviado --> Cancelado
         //   - reembolsa solo costo de prods
     }
+
 
 }
