@@ -1,8 +1,5 @@
 package medioDePago;
 
-<<<<<<< HEAD
-public interface MedioDePago {
-=======
 public abstract class MedioDePago {
 
     public final void procesarPago(){
@@ -16,5 +13,4 @@ public abstract class MedioDePago {
     public abstract void reservarFondos();
     public abstract void ejecutarTransaccion();
     public abstract void notificarResultado();
->>>>>>> dev
 }

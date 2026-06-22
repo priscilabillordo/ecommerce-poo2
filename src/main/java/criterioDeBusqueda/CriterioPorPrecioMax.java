@@ -1,6 +1,6 @@
 package criterioDeBusqueda;
 
-import items.item.Item;
+import item.Item;
 import lombok.Getter;
 
 import java.util.List;

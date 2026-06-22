@@ -1,6 +1,6 @@
 package criterioDeBusqueda;
 
-import items.item.Item;
+import item.Item;
 
 import java.util.List;
 

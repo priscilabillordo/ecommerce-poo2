@@ -1,6 +1,6 @@
 package criterioDeBusqueda;
 
-import items.item.Item;
+import item.Item;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.mockito.Mockito.mock;

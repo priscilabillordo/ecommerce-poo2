@@ -1,7 +1,7 @@
 package criterioDeBusqueda.operadorBinario;
 
 import criterioDeBusqueda.CriterioDeBusqueda;
-import items.item.Item;
+import item.Item;
 
 import java.util.List;
 import java.util.stream.Stream;
