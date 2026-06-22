@@ -31,4 +31,8 @@ public abstract class EstadoPedido {
         // todo: solo lo hace Enviado
     }
 
+    public void reembolsar(Pedido pedido){
+        // todo: solo lo hace En_Preparacion y Enviado al cancelarlo
+    }
+
 }

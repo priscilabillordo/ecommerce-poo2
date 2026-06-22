@@ -1,5 +1,6 @@
 package pedido;
 
+import ecommerce.EcommerceData;
 import items.item.Item;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,23 +16,20 @@ public class Pedido {
 
     private EstadoPedido estado;
     private List<Item> items;
-    private String direccionEntrega; // Direccion CONSULTAR
+    private String direccionEntrega;
     // * Comento porque todavia no está definida la clase MetodoDeEnvio
     // private MetodoDeEnvio metodoDeEnvio;
     private MedioDePago medioDePago;
-    // private double costo;
+    private EcommerceData data;
 
-    /*
-    public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio){
-
+    public Pedido(String direccionEntrega, MedioDePago medioDePago){
+        //MetodoDeEnvio metodoDeEnvio
         this.items = new ArrayList<>();
         this.direccionEntrega = direccionEntrega;
         this.medioDePago = medioDePago;
-        this.metodoDeEnvio = metodoDeEnvio;
-        // this.costo = 0;
+        //this.metodoDeEnvio = metodoDeEnvio;
     }
 
-     */
     public void agregarItem(Item item){
         this.estado.cargarItem(item, this);
     }
@@ -64,6 +62,16 @@ public class Pedido {
         return this.items.stream().mapToDouble(i -> i.getPeso()).sum();
     }
 
+    public double costoDeItems(){
+        return this.items.stream().mapToDouble(Item::getPrecioFinal).sum();
+    }
+
+    public double costo(){
+        return 0d;
+        // this.metodoDeEnvio.costoDeEnvio(this);
+    }
+
+
     public void addItem(Item item){
         this.items.add(item);
     }
@@ -82,11 +90,7 @@ public class Pedido {
         //   - repone stock de las unidades
     }
 
-    public void reembolsar(){
-        // todo: todavia no se como lo hago a esto
-        // EnPreparacion --> Cancelado
-        //   - reembolsa tanto costo de prods y envio
-        // Enviado --> Cancelado
-        //   - reembolsa solo costo de prods
+    public void reembolsar(NotaDeCredito notaDeCredito){
+        this.data.agregarNota(notaDeCredito);
     }
 }
