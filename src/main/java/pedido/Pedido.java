@@ -6,6 +6,11 @@ import lombok.Setter;
 import medioDePago.MedioDePago;
 import pedido.estadoPedido.EstadoPedido;
 
+<<<<<<< HEAD
+import item.Item;
+import metodoDeEnvio.MetodoDeEnvio;
+=======
+>>>>>>> dev
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +29,11 @@ public class Pedido {
     /*
     public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio){
 
+<<<<<<< HEAD
+        this.items = new ArrayList<Item>();
+=======
         this.items = new ArrayList<>();
+>>>>>>> dev
         this.direccionEntrega = direccionEntrega;
         this.medioDePago = medioDePago;
         this.metodoDeEnvio = metodoDeEnvio;
@@ -89,4 +98,11 @@ public class Pedido {
         // Enviado --> Cancelado
         //   - reembolsa solo costo de prods
     }
+<<<<<<< HEAD
+
+    public double costoDeItems() {
+        return 0;
+    }
+=======
+>>>>>>> dev
 }
