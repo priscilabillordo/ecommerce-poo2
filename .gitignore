@@ -9,3 +9,7 @@
 
 # Intellij IDEA
 .idea
+
+build
+
+bin
