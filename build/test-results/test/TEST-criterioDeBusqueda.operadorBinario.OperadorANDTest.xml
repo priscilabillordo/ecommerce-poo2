@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="criterioDeBusqueda.operadorBinario.OperadorANDTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-06-15T01:37:16.735Z" hostname="PRISCILA" time="0.055">
-  <properties/>
-  <testcase name="seFiltranItemsQueSatisfacenAmbosCriterios()" classname="criterioDeBusqueda.operadorBinario.OperadorANDTest" time="0.02"/>
-  <testcase name="noSeFiltranItemsQueNoSatisfacenAmbosCriterios()" classname="criterioDeBusqueda.operadorBinario.OperadorANDTest" time="0.01"/>
-  <testcase name="seInicializaUnOperadorANDCorrectamente()" classname="criterioDeBusqueda.operadorBinario.OperadorANDTest" time="0.015"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

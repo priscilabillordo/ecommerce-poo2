@@ -1,6 +1,10 @@
 package pedido.estadoPedido;
 
+<<<<<<< HEAD
+import item.Item;
+=======
 import items.item.Item;
+>>>>>>> dev
 import pedido.Pedido;
 
 public abstract class EstadoPedido {

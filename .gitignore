@@ -10,4 +10,10 @@
 # Intellij IDEA
 .idea
 
+<<<<<<< HEAD
 build
+=======
+build
+
+bin
+>>>>>>> dev
