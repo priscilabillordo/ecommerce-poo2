@@ -1,12 +1,16 @@
 package pedido;
 
+import items.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 import medioDePago.MedioDePago;
 import pedido.estadoPedido.EstadoPedido;
 
+<<<<<<< HEAD
 import item.Item;
 import metodoDeEnvio.MetodoDeEnvio;
+=======
+>>>>>>> dev
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,20 +20,27 @@ public class Pedido {
 
     private EstadoPedido estado;
     private List<Item> items;
-    private String direccionEntrega;
-    private MetodoDeEnvio metodoDeEnvio;
+    private String direccionEntrega; // Direccion CONSULTAR
+    // * Comento porque todavia no está definida la clase MetodoDeEnvio
+    // private MetodoDeEnvio metodoDeEnvio;
     private MedioDePago medioDePago;
     // private double costo;
 
+    /*
     public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio){
 
+<<<<<<< HEAD
         this.items = new ArrayList<Item>();
+=======
+        this.items = new ArrayList<>();
+>>>>>>> dev
         this.direccionEntrega = direccionEntrega;
         this.medioDePago = medioDePago;
         this.metodoDeEnvio = metodoDeEnvio;
         // this.costo = 0;
     }
 
+     */
     public void agregarItem(Item item){
         this.estado.cargarItem(item, this);
     }
@@ -74,7 +85,6 @@ public class Pedido {
         // todo: c/item tiene que decrementar su stock
         // this.items.forEach(i -> i.decrementarStock())
     }
-
     public void reponerStock(){
         // todo
         // Confirmado --> Cancelado
@@ -88,8 +98,11 @@ public class Pedido {
         // Enviado --> Cancelado
         //   - reembolsa solo costo de prods
     }
+<<<<<<< HEAD
 
     public double costoDeItems() {
         return 0;
     }
+=======
+>>>>>>> dev
 }
