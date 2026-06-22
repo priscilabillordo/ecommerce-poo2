@@ -1,18 +1,15 @@
-package items.item;
+package item;
 
-import items.item.Paquete;
-import items.item.Producto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PaqueteTest {
-    Paquete p;
+    Paquete  p;
     Producto p1;
     Producto p2;
     Producto p3;
@@ -37,7 +34,7 @@ public class PaqueteTest {
                 0.25,
                 "7790742363107",
                 "La Serenisima",
-                "Frescos",
+                "Almacen",
                 1999.03,
                 1000,
                 2
@@ -48,7 +45,7 @@ public class PaqueteTest {
                 0,
                 "7798064180136",
                 "-",
-                "Frescos",
+                "Almacen",
                 1489,
                 876,
                 10
@@ -59,35 +56,39 @@ public class PaqueteTest {
                 0.1
         );
 
-        p.agregarItem(p1);
-        p.agregarItem(p2);
-        p.agregarItem(p3);
+        p.incluir(p1);
+        p.incluir(p2);
+        p.incluir(p3);
     }
 
     @Test
-    void verificarNombreDelPaquete() {
+    void verificarAtributosDelPaquete() {
         assertEquals("Bizcochuelo de chocolate",
                 p.getNombre());
-    }
 
-    @Test
-    void verificarDescripcionDelPaquete() {
         assertEquals("Paquete con productos para preparar bizcochuelo de chocolate",
                 p.getDescripcion());
-    }
 
-    @Test
-    void verificarElPrecioBaseDelPaquete() {
-        assertEquals(7084.03, p.getPrecioBase());
-    }
-
-    @Test
-    void verificarElPrecioFinalDelPaquete() {
-        assertEquals(6375.6269999999995, p.getPrecioFinal());
-    }
-
-    @Test
-    void verificarElPesoDelPaquete() {
+        assertEquals("Almacen", p.getCategoria());
         assertEquals(2416, p.getPeso());
+        assertEquals(0.1,  p.getDescuento());
+
+        assertEquals(7084.03, p.getPrecioBase());
+        assertEquals(6375.6269999999995, p.getPrecioFinal());
+
+        assertEquals(2, p.getStock());
+        assertTrue(p.hayStock());
+    }
+
+    @Test
+    void verificarElDecrementoDelStockDePaquete() {
+        p.decrementarStock();
+        assertEquals(1, p.getStock());
+    }
+
+    @Test
+    void verificarElAumentoDelStockDePaquete() {
+        p.aumentarStock();
+        assertEquals(3, p.getStock());
     }
 }

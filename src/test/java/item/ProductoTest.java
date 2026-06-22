@@ -1,10 +1,7 @@
-package items.item;
+package item;
 
-import items.Atributo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -43,11 +40,28 @@ public class ProductoTest {
         assertEquals(540,  p1.getPeso());
         assertEquals(3596, p1.getPrecioBase());
         assertEquals(2697, p1.getPrecioFinal());
+        assertEquals(0.25, p1.getDescuento());
+
+        assertTrue(p1.hayStock());
     }
 
     @Test
     void verificarAtributosDinamicosDelProducto() {
         p1.agregarAtributoDinamico(a);
         assertTrue(p1.getAtributos().contains(a));
+    }
+
+    @Test
+    void verificarElAumentoDeStockDelProducto() {
+        p1.aumentarStock();
+
+        assertEquals(6, p1.getStock());
+    }
+
+    @Test
+    void verificarElDecrementoDeStockDelProducto() {
+        p1.decrementarStock();
+
+        assertEquals(4, p1.getStock());
     }
 }
