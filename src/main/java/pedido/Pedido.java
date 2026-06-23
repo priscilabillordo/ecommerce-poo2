@@ -1,17 +1,12 @@
 package pedido;
 
-import ecommerce.EcommerceData;
-import items.item.Item;
+import item.Item;
 import lombok.Getter;
 import lombok.Setter;
 import medioDePago.MedioDePago;
+import metodoDeEnvio.MetodoDeEnvio;
 import pedido.estadoPedido.EstadoPedido;
 
-<<<<<<< HEAD
-import item.Item;
-import metodoDeEnvio.MetodoDeEnvio;
-=======
->>>>>>> dev
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,24 +17,17 @@ public class Pedido {
     private EstadoPedido estado;
     private List<Item> items;
     private String direccionEntrega;
+<<<<<<< HEAD
     // * Comento porque todavia no está definida la clase MetodoDeEnvio
     // private MetodoDeEnvio metodoDeEnvio;
     private MedioDePago medioDePago;
     private EcommerceData data;
 
-<<<<<<< HEAD
-    public Pedido(String direccionEntrega, MedioDePago medioDePago){
-        //MetodoDeEnvio metodoDeEnvio
-=======
-<<<<<<< HEAD
-        this.items = new ArrayList<Item>();
-=======
->>>>>>> dev
+    public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio){
         this.items = new ArrayList<>();
->>>>>>> dev
         this.direccionEntrega = direccionEntrega;
         this.medioDePago = medioDePago;
-        //this.metodoDeEnvio = metodoDeEnvio;
+        this.metodoDeEnvio = metodoDeEnvio;
     }
 
     public void agregarItem(Item item){
@@ -105,11 +93,8 @@ public class Pedido {
     public void reembolsar(NotaDeCredito notaDeCredito){
         this.data.agregarNota(notaDeCredito);
     }
-<<<<<<< HEAD
-
     public double costoDeItems() {
         return 0;
     }
-=======
->>>>>>> dev
+
 }
