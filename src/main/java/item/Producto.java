@@ -25,10 +25,46 @@ public class Producto extends Item {
         this.peso       = peso;
         this.stock      = stock;
         this.atributos  = new ArrayList<>();
+        this.validarAtributosObligatorios();
+    }
+
+    public void validarAtributosObligatorios() {
+        if (!this.tieneAtributosObligatoriosAsignados()) {
+            throw new IllegalArgumentException(
+                    "El producto tiene algun atributo obligatorio sin asignar"
+            );
+            //todo uso este temporalmente
+        }
+    }
+
+    private boolean tieneAtributosObligatoriosAsignados() {
+        return  this.textoValido(this.getNombre()) &&
+                this.textoValido(this.getDescripcion()) &&
+                this.textoValido(this.sku) &&
+                this.textoValido(this.marca) &&
+                this.textoValido(this.categoria) &&
+                this.precioBase > 0 &&
+                this.getDescuento() >= 0 &&
+                this.peso > 0 &&
+                this.stock >= 0;
+    }
+
+    private boolean textoValido(String texto) {
+        return texto != null && !texto.isBlank();
     }
 
     public void agregarAtributoDinamico(Atributo atributo) {
+        this.validarAtributoDinamico(atributo);
         this.atributos.add(atributo);
+    }
+
+    public void validarAtributoDinamico(Atributo atributo) {
+        if (!atributo.esValido()) {
+            throw new IllegalArgumentException(
+                    "El atributo dinamico que se quiere agregar no es valido"
+            );
+            //todo uso este temporalmente
+        }
     }
 
     @Override

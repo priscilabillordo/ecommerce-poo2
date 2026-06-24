@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PaqueteTest {
-    Paquete  p;
-    Producto p1;
-    Producto p2;
-    Producto p3;
-    List<Item> produtos;
+    private Paquete  p;
+    private Producto p1;
+    private Producto p2;
+    private Producto p3;
+    private List<Item> produtos;
 
 
     @BeforeEach
