@@ -15,7 +15,8 @@ public class CriterioPorNombre implements CriterioDeBusqueda {
 
     @Override
     public List<Item> filtrarItems(List<Item> items) {
-        return items.stream().filter(item -> item.getNombre().contains(this.nombre)).toList();
-        // En el ejemplo de uso el nombre no debe ser exacto: "Nombre contiene "pack" "
+        return items.stream().
+                filter(item -> item.getNombre().contains(this.nombre)).
+                toList();
     }
 }
