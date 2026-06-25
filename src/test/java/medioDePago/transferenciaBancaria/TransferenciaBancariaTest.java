@@ -18,13 +18,10 @@ public class TransferenciaBancariaTest {
     }
 
     @Test
-    void seChequeaLaAsignacionDelCBUDeUnaCuenta(){
+    void seInicializaUnaCuentaParaTransferirCorrectamente(){
         assertEquals("1234567891011121314151", transferenciaBancaria.getCbu());
-    }
-
-    @Test
-    void seChequeaLaAsignacionDeUnAliasDeUnaCuenta(){
         assertEquals("priscilaCuenta", transferenciaBancaria.getAlias());
+        assertEquals(api, transferenciaBancaria.getApi());
     }
 
     @Test

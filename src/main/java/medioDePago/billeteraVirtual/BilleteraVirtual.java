@@ -1,5 +1,6 @@
 package medioDePago.billeteraVirtual;
 
+import exceptions.MedioDePagoException;
 import lombok.Getter;
 import medioDePago.MedioDePago;
 
@@ -14,8 +15,8 @@ public class BilleteraVirtual extends MedioDePago {
     }
 
     @Override
-    public void validarDatos() {
-        this.api.validarSaldo(); // check si tira error
+    public void validarDatos() throws MedioDePagoException {
+        this.api.validarSaldo();
     }
 
     @Override

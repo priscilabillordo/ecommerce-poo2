@@ -1,5 +1,6 @@
 package medioDePago.transferenciaBancaria;
 
+import exceptions.MedioDePagoException;
 import lombok.Getter;
 import medioDePago.MedioDePago;
 
@@ -16,7 +17,7 @@ public class TransferenciaBancaria extends MedioDePago {
     }
 
     @Override
-    public void validarDatos() {
+    public void validarDatos() throws MedioDePagoException {
         this.api.validarCuenta();
     }
 

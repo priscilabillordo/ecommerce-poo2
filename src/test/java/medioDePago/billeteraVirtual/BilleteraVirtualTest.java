@@ -1,11 +1,14 @@
 package medioDePago.billeteraVirtual;
 
+import exceptions.MedioDePagoException;
+import exceptions.PedidoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 public class BilleteraVirtualTest {
 
@@ -19,9 +22,11 @@ public class BilleteraVirtualTest {
     }
 
     @Test
-    void seChequeaLaAsignacionDeSaldoDeUnaBilletera(){
+    void seInicializaUnaBilleteraVirtualCorrectamente(){
         assertEquals(20000, billeteraVirtual.getSaldo());
+        assertEquals(api, billeteraVirtual.getApi());
     }
+
     @Test
     void seValidanLosDatosDeLaBilletera(){
         billeteraVirtual.validarDatos();
@@ -50,7 +55,33 @@ public class BilleteraVirtualTest {
         verify(api).notificar();
     }
 
+    /*
+    * Test procesarPago() heredado de MedioDePago
+    * */
 
-    // testear excepciones NO SE aun
+    @Test
+    void seProcesaUnPagoCorrectamente(){
+        // Pruebo el template
+        billeteraVirtual.procesarPago();
 
+        // Verifico interacciones con la api
+        verify(api).validarSaldo();
+        verify(api).bloquearSaldo();
+        verify(api).acreditar();
+        verify(api).notificar();
+    }
+
+    @Test
+    void cuandoNoSeProcesaUnPagoLaApiNoHaceNadaMas(){
+        // Configuro el mock para que falle
+        doThrow(new MedioDePagoException("Los datos no son válidos")).when(api).validarSaldo();
+
+        // Pruebo el template con el caso que falla
+        billeteraVirtual.procesarPago();
+
+        // Verifico no mas interacciones con la api
+        verify(api, never()).bloquearSaldo();
+        verify(api, never()).acreditar();
+        verify(api, never()).notificar();
+    }
 }
