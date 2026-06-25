@@ -1,5 +1,6 @@
 package medioDePago.tarjetaDeCredito;
 
+import exceptions.MedioDePagoException;
 import lombok.Getter;
 import medioDePago.MedioDePago;
 
@@ -20,7 +21,7 @@ public class TarjetaDeCredito extends MedioDePago {
     }
 
     @Override
-    public void validarDatos() {
+    public void validarDatos() throws MedioDePagoException {
         this.api.validarTarjeta();
     }
 

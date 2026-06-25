@@ -22,11 +22,9 @@ public class TarjetaDeCreditoTest {
     @Test
     void seChequeaLaAsignacionDeDatosDeLaTarjeta(){
         assertEquals("1234-5678-7654-3210", tarjeta.getNumeroDeTarjeta());
-    }
-
-    @Test
-    void seChequeaLaAsignacionDelCvvDeLaTarjeta(){
         assertEquals("100", tarjeta.getCvv());
+        assertEquals(LocalDate.of(2030,6,29), tarjeta.getVencimiento());
+        assertEquals(api, tarjeta.getApi());
     }
 
     @Test
