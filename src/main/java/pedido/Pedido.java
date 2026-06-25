@@ -1,10 +1,14 @@
 package pedido;
 
+import ecommerce.EcommerceData;
+import ecommerce.NotaDeCredito;
+import exceptions.PedidoException;
 import item.Item;
 import lombok.Getter;
 import lombok.Setter;
 import medioDePago.MedioDePago;
 import metodoDeEnvio.MetodoDeEnvio;
+import pedido.estadoPedido.Borrador;
 import pedido.estadoPedido.EstadoPedido;
 
 import java.util.ArrayList;
@@ -19,21 +23,48 @@ public class Pedido {
     private String direccionEntrega;
     private MetodoDeEnvio metodoDeEnvio;
     private MedioDePago medioDePago;
+    private EcommerceData data;
 
-    public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio){
+    public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio, EcommerceData data){
         this.items = new ArrayList<>();
         this.direccionEntrega = direccionEntrega;
         this.medioDePago = medioDePago;
         this.metodoDeEnvio = metodoDeEnvio;
+        this.data = data;
+        this.estado = new Borrador();
+    }
+
+    public double peso(){
+        return this.items.stream().mapToDouble(i -> i.getPeso()).sum();
+    }
+
+    public double costoDeItems(){
+        return this.items.stream().mapToDouble(Item::getPrecioFinal).sum();
+    }
+
+    public double costo(){
+        return this.metodoDeEnvio.costoDeEnvio(this);
     }
 
     public void agregarItem(Item item){
+        /*
+        * Agrega un item al pedido dependiendo el estado.
+        * Solo funciona si su estado es Borrador, sino lanza una excepción.
+        * */
         this.estado.cargarItem(item, this);
     }
 
     public void sacarItem(Item item){
+        /*
+         * Saca un item del pedido dependiendo el estado.
+         * Solo funciona si su estado es Borrador, sino lanza una excepción.
+         * */
+        if (!this.items.contains(item)){
+            throw new PedidoException("El item no está en el pedido");
+        }
         this.estado.quitarItem(item, this);
-    }
+        }
+
 
     public void confirmar(){
         this.estado.confirmarPedido(this);
@@ -55,9 +86,9 @@ public class Pedido {
         this.estado.cancelarPedido(this);
     }
 
-    public double peso(){
-        return this.items.stream().mapToDouble(i -> i.getPeso()).sum();
-    }
+    /*
+    * Metodos que son llamados por los estados, el cliente no accede a estos
+    * */
 
     public void addItem(Item item){
         this.items.add(item);
@@ -68,24 +99,14 @@ public class Pedido {
     }
 
     public void decrementarStock(){
-        // todo: c/item tiene que decrementar su stock
-        // this.items.forEach(i -> i.decrementarStock())
+        this.items.forEach(Item::decrementarStock);
     }
     public void reponerStock(){
-        // todo
-        // Confirmado --> Cancelado
-        //   - repone stock de las unidades
+        this.items.forEach(Item::aumentarStock);
     }
 
-    public void reembolsar(){
-        // todo: todavia no se como lo hago a esto
-        // EnPreparacion --> Cancelado
-        //   - reembolsa tanto costo de prods y envio
-        // Enviado --> Cancelado
-        //   - reembolsa solo costo de prods
-    }
-    public double costoDeItems() {
-        return 0;
+    public void reembolsar(NotaDeCredito notaDeCredito){
+        this.data.agregarNota(notaDeCredito);
     }
 
 }

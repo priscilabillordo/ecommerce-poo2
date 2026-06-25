@@ -6,7 +6,7 @@ public class Confirmado extends EstadoPedido {
 
     @Override
     public void prepararPedido(Pedido pedido){
-        pedido.setEstado(new En_Preparacion());
+        pedido.setEstado(new EnPreparacion());
     }
 
     @Override

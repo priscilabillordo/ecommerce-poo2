@@ -1,14 +1,15 @@
 package pedido.estadoPedido;
 
+import ecommerce.NotaDeCredito;
 import pedido.Pedido;
 
-public class En_Preparacion extends EstadoPedido {
+public class EnPreparacion extends EstadoPedido {
 
     @Override
     public void cancelarPedido(Pedido pedido){
         pedido.setEstado(new Cancelado());
         pedido.reponerStock();
-        pedido.reembolsar();
+        pedido.reembolsar(new NotaDeCredito(pedido.costo(), pedido));
     }
 
     @Override
