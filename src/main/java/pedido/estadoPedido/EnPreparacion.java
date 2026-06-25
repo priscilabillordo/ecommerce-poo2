@@ -1,9 +1,9 @@
 package pedido.estadoPedido;
 
-import pedido.NotaDeCredito;
+import ecommerce.NotaDeCredito;
 import pedido.Pedido;
 
-public class En_Preparacion extends EstadoPedido {
+public class EnPreparacion extends EstadoPedido {
 
     @Override
     public void cancelarPedido(Pedido pedido){

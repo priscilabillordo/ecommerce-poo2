@@ -1,6 +1,6 @@
 package pedido.estadoPedido;
 
-import pedido.NotaDeCredito;
+import ecommerce.NotaDeCredito;
 import pedido.Pedido;
 
 public class Enviado extends EstadoPedido {

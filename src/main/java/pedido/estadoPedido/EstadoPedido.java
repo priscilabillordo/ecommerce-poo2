@@ -1,39 +1,42 @@
 package pedido.estadoPedido;
 
 
+import exceptions.PedidoException;
 import item.Item;
 import pedido.Pedido;
 
 public abstract class EstadoPedido {
 
     public void cargarItem(Item item, Pedido pedido){
-        // todo: el unico que hace esto es Borrador
+        // El unico estado que hace esto es Borrador
+        throw new PedidoException("Operación inválida: No se puede cargar el item");
     }
 
     public void quitarItem(Item item, Pedido pedido){
-        // todo: el unico que hace esto es Borrador
+        // El unico que hace esto es Borrador
+        throw new PedidoException("Operación inválida: No se puede quitar el item");
     }
 
     public void confirmarPedido(Pedido pedido){
-        // todo: lo hacen Borrador
+        throw new PedidoException("Operación inválida: El pedido no puede ser confirmado");
     }
     public void cancelarPedido(Pedido pedido){
-        // todo: lo hacen Borrador, Confirmado, En_Preparacion, Enviado
+        // Lo hacen Borrador, Confirmado, En_Preparacion, Enviado
+        throw new PedidoException("Operación inválida: El pedido no puede ser cancelado");
     }
     public void prepararPedido(Pedido pedido){
-        // todo: solo lo hace Confirmado
+        // Solo lo hace Confirmado
+        throw new PedidoException("Operación inválida: El pedido no puede ser preparado");
     }
 
     public void enviarPedido(Pedido pedido){
-        // todo: solo lo hace EnPreparacion
+        // Solo lo hace EnPreparacion
+        throw new PedidoException("Operación inválida: El pedido no puede ser enviado");
     }
 
     public void entregarPedido(Pedido pedido){
-        // todo: solo lo hace Enviado
-    }
-
-    public void reembolsar(Pedido pedido){
-        // todo: solo lo hace En_Preparacion y Enviado al cancelarlo
+        // Solo lo hace Enviado
+        throw new PedidoException("Operación inválida: El pedido no puede ser entregado");
     }
 
 }

@@ -1,7 +1,5 @@
 package ecommerce;
 
-import pedido.NotaDeCredito;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,6 @@
-package pedido;
+package ecommerce;
+
+import pedido.Pedido;
 
 public class NotaDeCredito {
 

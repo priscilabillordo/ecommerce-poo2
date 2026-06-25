@@ -5,6 +5,10 @@ import pedido.Pedido;
 
 public class Borrador extends EstadoPedido {
 
+    /*
+    * Tests comportamiento de la clase Borrador
+    * */
+
     @Override
     public void cargarItem(Item item, Pedido pedido){
         pedido.addItem(item);
