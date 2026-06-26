@@ -1,9 +1,11 @@
 package item;
 
+import exceptions.ItemException;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 public class Producto extends Item {
@@ -14,7 +16,6 @@ public class Producto extends Item {
     private final double peso;
     private final List<Atributo> atributos;
     private int stock;
-    //private double precioFinal; no es un estado independiente, es un cálculo derivado
 
     public Producto(String nombre, String descripcion, double descuento, String sku, String marca, String categoria, double precioBase, double peso, int stock){
         super(nombre, descripcion, descuento);
@@ -30,10 +31,9 @@ public class Producto extends Item {
 
     public void validarAtributosObligatorios() {
         if (!this.tieneAtributosObligatoriosAsignados()) {
-            throw new IllegalArgumentException(
+            throw new ItemException(
                     "El producto tiene algun atributo obligatorio sin asignar"
             );
-            //todo uso este temporalmente
         }
     }
 
@@ -60,10 +60,9 @@ public class Producto extends Item {
 
     public void validarAtributoDinamico(Atributo atributo) {
         if (!atributo.esValido()) {
-            throw new IllegalArgumentException(
+            throw new ItemException(
                     "El atributo dinamico que se quiere agregar no es valido"
             );
-            //todo uso este temporalmente
         }
     }
 
@@ -88,7 +87,7 @@ public class Producto extends Item {
 
     @Override
     public void aumentarStock() {
-        this.stock +=1;
-    }
+        this.stock += 1;
 
+    }
 }
