@@ -34,7 +34,9 @@ public class Paquete extends Item {
 
     @Override
     public int getStock() {
-        return this.items.stream().mapToInt(Item::getStock).min().getAsInt();
+        return (!this.items.isEmpty()) ?
+                this.items.stream().mapToInt(Item::getStock).min().getAsInt()
+                : 0;
         // la operación min devuelve OptionalInt que es una especie de objeto contenedor
         // Si el OptionalInt tiene un valor lo devuelve, en caso contrario solo devuelve 0
     }

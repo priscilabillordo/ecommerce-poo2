@@ -1,10 +1,13 @@
 package item;
 
+import exceptions.ItemException;
+import exceptions.PedidoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductoTest {
@@ -78,55 +81,93 @@ public class ProductoTest {
     }
 
     @Test
-    void verificarAtributoObligatorioInvalidoDelProducto() {
-        assertThrows(IllegalArgumentException.class,
-                () -> productoIvalido = new Producto("",
-                        "Leche parcialmente descremada liviana 1% La Serenisima 1L",
-                        0.25,
-                        "7790742363107",
-                        "La Serenisima",
-                        "Almacen",
-                        1999.03,
-                        1000,
-                        2)
-        );
+    void verificarNombreVacioInvalidoDelProducto() {
+        assertThatThrownBy(() -> productoIvalido = new Producto("",
+                "Leche parcialmente descremada liviana 1% La Serenisima 1L",
+                0.25,
+                "7790742363107",
+                "La Serenisima",
+                "Almacen",
+                1999.03,
+                1000,
+                2))
+                .isInstanceOf(ItemException.class)
+                .hasMessage("El producto tiene algun atributo obligatorio sin asignar");
     }
 
     @Test
-    void verificarAtributoObligatorioInvalidoDelProducto2() {
-        assertThrows(IllegalArgumentException.class,
-                () -> productoIvalido = new Producto(null,
-                        "Leche parcialmente descremada liviana 1% La Serenisima 1L",
-                        0.25,
-                        "7790742363107",
-                        "La Serenisima",
-                        "Almacen",
-                        1999.03,
-                        1000,
-                        2)
-        );
+    void verificarNombreInvalidoDelProducto() {
+        assertThatThrownBy(() -> productoIvalido = new Producto(null,
+                "Leche parcialmente descremada liviana 1% La Serenisima 1L",
+                0.25,
+                "7790742363107",
+                "La Serenisima",
+                "Almacen",
+                1999.03,
+                1000,
+                2))
+                .isInstanceOf(ItemException.class)
+                .hasMessage("El producto tiene algun atributo obligatorio sin asignar");
     }
 
 
     @Test
-    void verificarAtributoObligatorioInvalidoDelProducto3() {
-        assertThrows(IllegalArgumentException.class,
-                () -> productoIvalido = new Producto("Leche",
-                        "Leche parcialmente descremada liviana 1% La Serenisima 1L",
-                        -1,
-                        "7790742363107",
-                        "La Serenisima",
-                        "Almacen",
-                        1999.03,
-                        1000,
-                        2)
-        );
+    void verificarDescuentoNegativoInvalidoDelProducto() {
+        assertThatThrownBy(() -> productoIvalido = new Producto("Leche",
+                "Leche parcialmente descremada liviana 1% La Serenisima 1L",
+                -1,
+                "7790742363107",
+                "La Serenisima",
+                "Almacen",
+                1999.03,
+                1000,
+                2))
+                .isInstanceOf(ItemException.class)
+                .hasMessage("El producto tiene algun atributo obligatorio sin asignar");
+    }
+
+    @Test
+    void verificarSkuVacioInvalidoDelProducto() {
+        assertThatThrownBy(() -> new Producto(
+                "Leche",
+                "Leche parcialmente descremada liviana 1% La Serenisima 1L",
+                0.25,
+                "",
+                "La Serenisima",
+                "Almacen",
+                100,
+                100,
+                1))
+                .isInstanceOf(ItemException.class)
+                .hasMessage("El producto tiene algun atributo obligatorio sin asignar");
+    }
+
+    @Test
+    void verificarPrecioBaseInvalidoDelProducto() {
+        assertThatThrownBy(() -> new Producto(
+                "Leche",
+                "Leche parcialmente descremada liviana 1% La Serenisima 1L",
+                0.25,
+                "7790742363107",
+                "La Serenisima",
+                "Almacen",
+                0,
+                100,
+                1
+                ))
+                .isInstanceOf(ItemException.class)
+                .hasMessage("El producto tiene algun atributo obligatorio sin asignar");
     }
 
     @Test
     void verificarAtributoDinamicoInvalidoDelProducto() {
+        assertThatThrownBy(() -> producto.agregarAtributoDinamico(atributoInvalido))
+                .isInstanceOf(ItemException.class)
+                .hasMessage("El atributo dinamico que se quiere agregar no es valido");
+    }
 
-        assertThrows(IllegalArgumentException.class,
-                () -> producto.agregarAtributoDinamico(atributoInvalido));
+    @Test
+    void verificarIncluirDeItem() {
+        producto.incluir(null);
     }
 }

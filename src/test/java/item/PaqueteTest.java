@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PaqueteTest {
-    private Paquete  p;
+    private Paquete paquete;
+    private Paquete paqueteVacio;
     private Producto p1;
     private Producto p2;
     private Producto p3;
@@ -51,44 +52,57 @@ public class PaqueteTest {
                 10
         );
 
-        p = new Paquete("Bizcochuelo de chocolate",
+        paquete = new Paquete("Bizcochuelo de chocolate",
                 "Paquete con productos para preparar bizcochuelo de chocolate",
                 0.1
         );
 
-        p.incluir(p1);
-        p.incluir(p2);
-        p.incluir(p3);
+        paquete.incluir(p1);
+        paquete.incluir(p2);
+        paquete.incluir(p3);
+
+        paqueteVacio = new Paquete(
+                "vacio",
+                "sin productos",
+                0
+        );
     }
 
     @Test
     void verificarAtributosDelPaquete() {
         assertEquals("Bizcochuelo de chocolate",
-                p.getNombre());
+                paquete.getNombre());
 
         assertEquals("Paquete con productos para preparar bizcochuelo de chocolate",
-                p.getDescripcion());
+                paquete.getDescripcion());
 
-        assertEquals("Almacen", p.getCategoria());
-        assertEquals(2416, p.getPeso());
-        assertEquals(0.1,  p.getDescuento());
+        assertEquals("Almacen", paquete.getCategoria());
+        assertEquals(2416, paquete.getPeso());
+        assertEquals(0.1,  paquete.getDescuento());
 
-        assertEquals(7084.03, p.getPrecioBase());
-        assertEquals(6375.6269999999995, p.getPrecioFinal());
+        assertEquals(7084.03, paquete.getPrecioBase());
+        assertEquals(6375.6269999999995, paquete.getPrecioFinal());
 
-        assertEquals(2, p.getStock());
-        assertTrue(p.hayStock());
+        assertEquals(2, paquete.getStock());
+        assertTrue(paquete.hayStock());
     }
+
 
     @Test
     void verificarElDecrementoDelStockDePaquete() {
-        p.decrementarStock();
-        assertEquals(1, p.getStock());
+        paquete.decrementarStock();
+        assertEquals(1, paquete.getStock());
+    }
+
+    @Test
+    void paqueteSinItemsTieneStockCero() {
+        assertEquals(0, paqueteVacio.getStock());
+        assertFalse(paqueteVacio.hayStock());
     }
 
     @Test
     void verificarElAumentoDelStockDePaquete() {
-        p.aumentarStock();
-        assertEquals(3, p.getStock());
+        paquete.aumentarStock();
+        assertEquals(3, paquete.getStock());
     }
 }
