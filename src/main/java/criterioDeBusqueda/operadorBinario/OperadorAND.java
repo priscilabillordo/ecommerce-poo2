@@ -19,6 +19,5 @@ public class OperadorAND extends OperadorBinario {
         List<Item> itemsFiltrados = new ArrayList<>(primerFiltro);
         itemsFiltrados.retainAll(segundoFiltro);
         return itemsFiltrados.stream().distinct().toList();
-        // Consultar si es necesario el distinct()
     }
 }

@@ -1,9 +1,11 @@
 package criterioDeBusqueda;
 
 import item.Item;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class CriterioPorCategoria implements CriterioDeBusqueda {
 
     private String categoria;
@@ -15,9 +17,8 @@ public class CriterioPorCategoria implements CriterioDeBusqueda {
     @Override
     public List<Item> filtrarItems(List<Item> items) {
         return items.stream()
-                    .filter(item -> item.getDescripcion().equals(this.categoria))
+                    .filter(item -> item.getCategoria().equals(this.categoria))
                     .toList();
-        // TODO: falta la categoria
     }
 
 }

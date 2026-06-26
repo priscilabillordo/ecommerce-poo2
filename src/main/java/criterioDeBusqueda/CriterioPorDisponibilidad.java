@@ -8,7 +8,8 @@ public class CriterioPorDisponibilidad implements CriterioDeBusqueda {
 
     @Override
     public List<Item> filtrarItems(List<Item> items) {
-        return List.of();
-        // TODO: No puedo testear hasta ver el tema del stock
+        return items.stream()
+                .filter(Item::hayStock)
+                .toList();
     }
 }
