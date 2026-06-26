@@ -30,8 +30,6 @@ public class Paquete extends Item {
     @Override
     public String getCategoria() {
         return this.items.getFirst().getCategoria();
-        //todo Tomar la decision que todos los items que tenga van a tener la misma categoria
-        //todo o hacer que tenga una categoria propia
     }
 
     @Override

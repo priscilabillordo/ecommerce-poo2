@@ -3,16 +3,19 @@ package item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductoTest {
-    Producto p1;
-    Atributo a;
+    private Producto producto;
+    private Producto productoIvalido;
+    private Atributo atributo;
+    private Atributo atributoInvalido;
 
     @BeforeEach
     public void setUp() {
-        p1 = new Producto("Bizcochuelo en caja",
+        producto = new Producto("Bizcochuelo en caja",
                 "Bizcochuelo sabor chocolate Morixe 540 Grm",
                 0.25,
                 "7790199604198",
@@ -20,48 +23,110 @@ public class ProductoTest {
                 "Almacen",
                 3596,
                 540,
-                5
+                2
         );
 
-        a = new Atributo("fechaDeVencimiento", 2026-06-11);
+        atributo = new Atributo("fechaDeVencimiento", LocalDate.of(2026, 6, 11));
+        atributoInvalido = new Atributo(null, null);
     }
 
     @Test
     void verificarAtributosObligatoriosDelProducto() {
-        assertEquals("Bizcochuelo en caja", p1.getNombre());
-        assertEquals("7790199604198",       p1.getSku());
+        assertEquals("Bizcochuelo en caja", producto.getNombre());
+        assertEquals("7790199604198",       producto.getSku());
 
-        assertEquals("Bizcochuelo sabor chocolate Morixe 540 Grm", p1.getDescripcion());
+        assertEquals("Bizcochuelo sabor chocolate Morixe 540 Grm", producto.getDescripcion());
 
-        assertEquals("Morixe",  p1.getMarca());
-        assertEquals("Almacen", p1.getCategoria());
+        assertEquals("Morixe",  producto.getMarca());
+        assertEquals("Almacen", producto.getCategoria());
 
-        assertEquals(5,    p1.getStock());
-        assertEquals(540,  p1.getPeso());
-        assertEquals(3596, p1.getPrecioBase());
-        assertEquals(2697, p1.getPrecioFinal());
-        assertEquals(0.25, p1.getDescuento());
+        assertEquals(2,    producto.getStock());
+        assertEquals(540,  producto.getPeso());
+        assertEquals(3596, producto.getPrecioBase());
+        assertEquals(2697, producto.getPrecioFinal());
+        assertEquals(0.25, producto.getDescuento());
 
-        assertTrue(p1.hayStock());
+        assertTrue(producto.hayStock());
     }
 
     @Test
     void verificarAtributosDinamicosDelProducto() {
-        p1.agregarAtributoDinamico(a);
-        assertTrue(p1.getAtributos().contains(a));
+        producto.agregarAtributoDinamico(atributo);
+        assertTrue(producto.getAtributos().contains(atributo));
     }
 
     @Test
     void verificarElAumentoDeStockDelProducto() {
-        p1.aumentarStock();
+        producto.aumentarStock();
 
-        assertEquals(6, p1.getStock());
+        assertEquals(3, producto.getStock());
     }
 
     @Test
-    void verificarElDecrementoDeStockDelProducto() {
-        p1.decrementarStock();
+    void verificarDecrementoDeStockDelProducto() {
+        producto.decrementarStock();
 
-        assertEquals(4, p1.getStock());
+        assertEquals(1, producto.getStock());
+    }
+
+    @Test
+    void verificarNoHayStockDelProducto() {
+        producto.decrementarStock();
+        producto.decrementarStock();
+
+        assertFalse(producto.hayStock());
+    }
+
+    @Test
+    void verificarAtributoObligatorioInvalidoDelProducto() {
+        assertThrows(IllegalArgumentException.class,
+                () -> productoIvalido = new Producto("",
+                        "Leche parcialmente descremada liviana 1% La Serenisima 1L",
+                        0.25,
+                        "7790742363107",
+                        "La Serenisima",
+                        "Almacen",
+                        1999.03,
+                        1000,
+                        2)
+        );
+    }
+
+    @Test
+    void verificarAtributoObligatorioInvalidoDelProducto2() {
+        assertThrows(IllegalArgumentException.class,
+                () -> productoIvalido = new Producto(null,
+                        "Leche parcialmente descremada liviana 1% La Serenisima 1L",
+                        0.25,
+                        "7790742363107",
+                        "La Serenisima",
+                        "Almacen",
+                        1999.03,
+                        1000,
+                        2)
+        );
+    }
+
+
+    @Test
+    void verificarAtributoObligatorioInvalidoDelProducto3() {
+        assertThrows(IllegalArgumentException.class,
+                () -> productoIvalido = new Producto("Leche",
+                        "Leche parcialmente descremada liviana 1% La Serenisima 1L",
+                        -1,
+                        "7790742363107",
+                        "La Serenisima",
+                        "Almacen",
+                        1999.03,
+                        1000,
+                        2)
+        );
+    }
+
+    @Test
+    void verificarAtributoDinamicoInvalidoDelProducto() {
+
+        assertThrows(IllegalArgumentException.class,
+                () -> producto.agregarAtributoDinamico(atributoInvalido));
     }
 }
