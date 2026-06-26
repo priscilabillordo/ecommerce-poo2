@@ -51,6 +51,9 @@ public class Pedido {
         * Agrega un item al pedido dependiendo el estado.
         * Solo funciona si su estado es Borrador, sino lanza una excepción.
         * */
+        if (!item.hayStock()) {
+            throw new PedidoException("No se puede agregar el item (sin stock)");
+        }
         this.estado.cargarItem(item, this);
     }
 
@@ -65,8 +68,8 @@ public class Pedido {
         this.estado.quitarItem(item, this);
         }
 
-
     public void confirmar(){
+        this.medioDePago.procesarPago();
         this.estado.confirmarPedido(this);
     }
 
@@ -101,12 +104,27 @@ public class Pedido {
     public void decrementarStock(){
         this.items.forEach(Item::decrementarStock);
     }
+
     public void reponerStock(){
         this.items.forEach(Item::aumentarStock);
     }
 
     public void reembolsar(NotaDeCredito notaDeCredito){
         this.data.agregarNota(notaDeCredito);
+    }
+
+
+    /*
+     * Constructor solo válido para testear, ya que un estado no es inyectado
+     * */
+
+    Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio, EcommerceData data, EstadoPedido estado){
+        this.items = new ArrayList<>();
+        this.direccionEntrega = direccionEntrega;
+        this.medioDePago = medioDePago;
+        this.metodoDeEnvio = metodoDeEnvio;
+        this.data = data;
+        this.estado = estado;
     }
 
 }
