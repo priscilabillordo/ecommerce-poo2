@@ -1,0 +1,15 @@
+# Wrapper (Esto SI se sube)
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.properties
+!gradle/wrapper/gradle-wrapper.jar
+
+# Gradle
+.gradle
+
+# Intellij IDEA
+.idea
+
+build
+
+bin
