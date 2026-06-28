@@ -9,8 +9,11 @@ import lombok.Setter;
 import medioDePago.MedioDePago;
 import metodoDeEnvio.MetodoDeEnvio;
 import pedido.estadoPedido.Borrador;
+import pedido.estadoPedido.Confirmado;
 import pedido.estadoPedido.EstadoPedido;
+import subsistema.Subsistema;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,31 +21,37 @@ import java.util.List;
 @Getter
 public class Pedido {
 
+    private List<Subsistema> subsistemas;
     private EstadoPedido estado;
     private List<Item> items;
     private String direccionEntrega;
     private MetodoDeEnvio metodoDeEnvio;
     private MedioDePago medioDePago;
     private EcommerceData data;
+    private LocalDate fecha;
 
     public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio, EcommerceData data){
+        this.subsistemas = new ArrayList<>();
         this.items = new ArrayList<>();
         this.direccionEntrega = direccionEntrega;
         this.medioDePago = medioDePago;
         this.metodoDeEnvio = metodoDeEnvio;
         this.data = data;
         this.estado = new Borrador();
+        this.fecha = null;
     }
 
     public double peso(){
         return this.items.stream().mapToDouble(i -> i.getPeso()).sum();
     }
 
+    public double costoTotal() {return this.costoDeItems() + this.costoDeEnvio(); }
+
     public double costoDeItems(){
         return this.items.stream().mapToDouble(Item::getPrecioFinal).sum();
     }
 
-    public double costo(){
+    public double costoDeEnvio(){
         return this.metodoDeEnvio.costoDeEnvio(this);
     }
 
