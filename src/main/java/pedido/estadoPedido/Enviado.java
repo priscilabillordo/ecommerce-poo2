@@ -13,6 +13,8 @@ public class Enviado extends EstadoPedido {
 
     @Override
     public void entregarPedido(Pedido pedido){
+
+        pedido.setFecha(LocalDate.now());
         pedido.setEstado(new Entregado());
     }
 }
