@@ -9,7 +9,7 @@ public class EnPreparacion extends EstadoPedido {
     public void cancelarPedido(Pedido pedido){
         pedido.setEstado(new Cancelado());
         pedido.reponerStock();
-        pedido.reembolsar(new NotaDeCredito(pedido.costo(), pedido));
+        pedido.reembolsar(new NotaDeCredito(pedido.costoDeEnvio(), pedido));
     }
 
     @Override
