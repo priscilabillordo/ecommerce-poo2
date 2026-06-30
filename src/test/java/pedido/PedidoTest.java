@@ -128,7 +128,7 @@ public class PedidoTest {
 
     @Test
     void seCalculaElCostoFinalDeUnPedido(){
-        double costoDePedido = unPedido.costo();
+        double costoDePedido = unPedido.costoTotal();
         verify(unMetodoDeEnvio).costoDeEnvio(unPedido);
         assertThat(costoDePedido).isEqualTo(2500.0);
     }

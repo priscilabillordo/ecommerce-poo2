@@ -3,6 +3,8 @@ package pedido.estadoPedido;
 import ecommerce.NotaDeCredito;
 import pedido.Pedido;
 
+import java.time.LocalDate;
+
 public class Enviado extends EstadoPedido {
 
     @Override
