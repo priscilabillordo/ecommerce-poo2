@@ -18,7 +18,7 @@ public class NotificacionEmail implements Subsistema {
         if (this.requiereNotificar(estadoNuevo)){
             mailSender.enviarMail("cliente@mail.com",
                     "cliente",
-                    "Su pedido ahora está en:" + estadoNuevo,
+                    "El estado del pedido fue actualizado",
                     null);
         }
     }
@@ -29,5 +29,4 @@ public class NotificacionEmail implements Subsistema {
                 estado instanceof Enviado    ||
                 estado instanceof Entregado;
     }
-
 }

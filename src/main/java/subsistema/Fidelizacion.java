@@ -20,7 +20,7 @@ public class Fidelizacion implements Subsistema {
 
     private void envioMensaje(String emailCliente) {
         System.out.printf(
-                "Cliente: tiene un cupón de descuento del 5%",
+                "Cliente %s: tiene un cupón de descuento del 5 porciento",
                 emailCliente
         );
     }
