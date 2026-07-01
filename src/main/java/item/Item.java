@@ -1,6 +1,11 @@
 package item;
 
+import exceptions.ItemException;
+import exceptions.PedidoException;
 import lombok.Getter;
+import lombok.Setter;
+
+@Setter
 @Getter
 public abstract class Item {
     private final String nombre;
@@ -19,8 +24,14 @@ public abstract class Item {
     public abstract String  getCategoria();
     public abstract int     getStock();
     public abstract boolean hayStock();
-    public abstract void    decrementarStock();
     public abstract void    aumentarStock();
+    public abstract void    decrementarStock();
+
+    protected void validarSiHayStock() {
+        if (!this.hayStock()) {
+            throw new ItemException("No hay stock suficiente.");
+        }
+    }
 
     public void incluir(Item i)  { }
 }

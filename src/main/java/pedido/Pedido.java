@@ -9,13 +9,15 @@ import lombok.Setter;
 import medioDePago.MedioDePago;
 import metodoDeEnvio.MetodoDeEnvio;
 import pedido.estadoPedido.Borrador;
-import pedido.estadoPedido.Confirmado;
 import pedido.estadoPedido.EstadoPedido;
 import subsistema.Subsistema;
+import venta.Venta;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Setter
 @Getter
 public class Pedido {
@@ -96,11 +98,14 @@ public class Pedido {
 
 
     // Metodos que son llamados por los estados, el cliente no accede a estos
-    public void addItem(Item item){
+    public void addItem(Item item) {
         this.items.add(item);
+        item.decrementarStock();
     }
+
     public void deleteItem(Item item){
         this.items.remove(item);
+        item.aumentarStock();
     }
 
     public void decrementarStock(){
@@ -119,6 +124,10 @@ public class Pedido {
     }
     public void deleteubsistema(Subsistema subsistema) {
         this.subsistemas.remove(subsistema);
+    }
+
+    public void registrarVenta(Venta venta) {
+        data.agregarVenta(venta);
     }
 
     // Constructor solo válido para testear, ya que un estado no es inyectado

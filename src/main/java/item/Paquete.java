@@ -48,6 +48,7 @@ public class Paquete extends Item {
 
     @Override
     public void decrementarStock() {
+        this.validarSiHayStock();
         this.items.forEach(Item::decrementarStock);
     }
 
