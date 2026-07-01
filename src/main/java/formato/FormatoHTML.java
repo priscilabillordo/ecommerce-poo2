@@ -1,11 +1,13 @@
 package formato;
 
+import lombok.Getter;
 import reporte.Estadistica;
 import reporte.Reporte;
 import reporte.ReporteProductosMasVendidos;
 
 import java.util.Map;
 
+@Getter
 public class FormatoHTML implements Formato {
     private String estadoDeNegocio;
 
