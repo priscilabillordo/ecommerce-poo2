@@ -13,9 +13,10 @@ import pedido.estadoPedido.Borrador;
 import pedido.estadoPedido.Confirmado;
 import pedido.estadoPedido.EstadoPedido;
 import subsistema.Subsistema;
+import venta.Venta;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class PedidoTest {
@@ -34,6 +35,7 @@ public class PedidoTest {
     private EstadoPedido unEstado;
     private EstadoPedido otroEstado;
     private NotaDeCredito unaNotaDeCredito;
+    private Venta unaVenta;
 
     @BeforeEach
     void setUp(){
@@ -56,6 +58,7 @@ public class PedidoTest {
 
         unData = mock(EcommerceData.class);
         unaNotaDeCredito = mock(NotaDeCredito.class);
+        unaVenta = mock(Venta.class);
         unPedido = new Pedido("Roque Saenz Peña 200", unMedioDePago, unMetodoDeEnvio, unData);
         when(unMetodoDeEnvio.costoDeEnvio(unPedido)).thenReturn(2500.0);
 
@@ -87,6 +90,15 @@ public class PedidoTest {
         assertThat(unPedido.getEstado()).isEqualTo(otroEstado);
         assertThat(unPedido.getMetodoDeEnvio()).isEqualTo(otroMetodoDeEnvio);
         assertThat(unPedido.getMedioDePago()).isEqualTo(otroMedioDePago);
+    }
+
+    @Test
+    void verificarElPesoDelPedidoCon3ProductoIguales(){
+        unPedido.agregarItem(unItem);
+        unPedido.agregarItem(unItem);
+        unPedido.agregarItem(unItem);
+
+        assertEquals(60.0, unPedido.peso());
     }
 
     @Test
@@ -159,6 +171,7 @@ public class PedidoTest {
     void seCalculaElCostoTotalDelPedido() {
         unPedido.agregarItem(unItem);
         double total = unPedido.costoTotal();
+
         verify(unMetodoDeEnvio).costoDeEnvio(unPedido);
         assertThat(total).isEqualTo(4500.0);
     }
@@ -204,6 +217,15 @@ public class PedidoTest {
         unPedido.setEstado(otroEstado);
 
         verify(unSubsistema).actualizar(unPedido, estadoAnterior, otroEstado);
+    }
+
+
+    @Test
+    void verificarQueSeRegistraUnaVentaCorrectamente() {
+
+        unPedido.registrarVenta(unaVenta);
+
+        verify(unData).agregarVenta(unaVenta);
     }
 
     // Tests delegacion al estado de un Pedido

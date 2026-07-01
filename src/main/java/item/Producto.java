@@ -2,6 +2,7 @@ package item;
 
 import exceptions.ItemException;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +83,7 @@ public class Producto extends Item {
 
     @Override
     public void decrementarStock() {
+        this.validarSiHayStock();
         this.stock -= 1;
     }
 
