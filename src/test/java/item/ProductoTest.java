@@ -17,6 +17,7 @@ public class ProductoTest {
     private Producto productoIvalido;
     private Atributo atributo;
     private Atributo atributoInvalido;
+    private Producto productoSinStock;
 
     @BeforeEach
     public void setUp() {
@@ -31,6 +32,16 @@ public class ProductoTest {
                 2
         );
 
+        productoSinStock = new Producto("Notebook Acer",
+                "Notebook 14",
+                0,
+                "83823942",
+                "Acer",
+                "Electronica",
+                400000,
+                1200,
+                0
+        );
         atributo = new Atributo("fechaDeVencimiento", LocalDate.of(2026, 6, 11));
         atributoInvalido = new Atributo(null, null);
     }
@@ -171,5 +182,12 @@ public class ProductoTest {
     @Test
     void verificarIncluirDeItem() {
         producto.incluir(null);
+    }
+
+    @Test
+    void seValidaQueUnProductoNoTieneStock(){
+        assertThatThrownBy(() -> productoSinStock.validarSiHayStock())
+                .isInstanceOf(ItemException.class)
+                .hasMessage("No hay stock suficiente.");
     }
 }

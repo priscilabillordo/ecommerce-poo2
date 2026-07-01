@@ -1,5 +1,6 @@
 package reporte;
 
+import formato.Formato;
 import item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -24,6 +26,8 @@ class ReporteProductosMasVendidosTest {
 
     private Item arroz;
     private Item leche;
+
+    private Formato unFormato;
 
     @BeforeEach
     void setUp() {
@@ -55,8 +59,21 @@ class ReporteProductosMasVendidosTest {
         venta2 = new Venta(pedido2);
         venta3 = new Venta(pedido3);
 
+        unFormato = mock(Formato.class);
     }
 
+    @Test
+    void seVerificaQueUnReporteFueInicializadoCorrectamente(){
+        assertThat(reporte.getEstadisticas()).isEmpty();
+        assertThat(reporte.getFechaInicio()).isEqualTo(LocalDate.of(2026, 6, 1));
+        assertThat(reporte.getFechaFin()).isEqualTo(LocalDate.of(2026, 6, 30));
+    }
+
+    @Test
+    void seVerificaQueUnReporteAceptaLaVisitaDeUnFormato(){
+        reporte.accept(unFormato);
+        verify(unFormato).visitar(reporte);
+    }
     @Test
     void verificarQueGenerarReporteIncluyeSoloVentasDentroDelRango() {
         reporte.generarReporte(List.of(venta1, venta2, venta3));
