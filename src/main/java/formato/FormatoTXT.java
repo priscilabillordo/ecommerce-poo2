@@ -1,25 +1,36 @@
 package formato;
 
 import item.Item;
+import reporte.Estadistica;
+import reporte.Reporte;
+import reporte.ReporteProductosMasVendidos;
 
-public class FormatoTXT {
-/*
-    public String exportar(ResultadoReporte resultado) {
+import java.util.Map;
 
+public class FormatoTXT implements Formato {
+    private String estadoDeNegocio;
+
+    @Override
+    public void visitar(ReporteProductosMasVendidos reporte) {
         StringBuilder sb = new StringBuilder();
+        sb.append("Item | Cantidad | Precio promedio\n");
 
-        sb.append("Producto | Cantidad | Precio promedio\n");
-
-        for (Item item : resultado.getResultados()) {
-            sb.append(item.getItem().getNombre())
+        reporte.getEstadisticas().forEach((clave, valor) -> {
+            sb.append(clave)
                     .append(" | ")
-                    .append(item.getCantidadVendida())
+                    .append(valor.getCantidadTotal())
                     .append(" | ")
-                    .append(item.getPrecioPromedio())
+                    .append(valor.getMontoTotal())
                     .append("\n");
-        }
+        });
 
-        return sb.toString();
+        this.estadoDeNegocio = sb.toString();
     }
-*/
+
+    @Override
+    public String exportar(Reporte reporte) {
+        reporte.accept(this);
+        return estadoDeNegocio;
+    }
+
 }

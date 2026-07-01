@@ -1,6 +1,8 @@
 package reporte;
 
+import formato.Formato;
 import item.Item;
+import lombok.Getter;
 import venta.Venta;
 
 import java.time.LocalDate;
@@ -8,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class ReporteProductosMasVendidos implements Reporte {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
@@ -29,13 +32,16 @@ public class ReporteProductosMasVendidos implements Reporte {
     }
 
     @Override
-    //TODO necesita ser más generico
-    public Map<String, Estadistica>  generarReporte(List<Venta> ventas) {
+    public Reporte generarReporte(List<Venta> ventas) {
         ventas.stream()
-                .filter(v -> !v.getFecha().isBefore(this.fechaInicio))
-                .filter(v -> !v.getFecha().isAfter(this.fechaFin))
+                .filter(v -> !v.getFecha().isBefore(this.fechaInicio) && !v.getFecha().isAfter(this.fechaFin))
                 .forEach(v -> v.accept(this));
 
-        return this.estadisticas;
+        return this;
+    }
+
+    @Override
+    public void accept(Formato formato) {
+        formato.visitar(this);
     }
 }
