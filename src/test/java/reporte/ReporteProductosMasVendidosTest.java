@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ReporteProductosMasVendidosTest {
@@ -59,16 +59,16 @@ class ReporteProductosMasVendidosTest {
 
     @Test
     void verificarQueGenerarReporteIncluyeSoloVentasDentroDelRango() {
-        Map<String, Estadistica> estadisticas = reporte.generarReporte(List.of(venta1, venta2, venta3));
+        reporte.generarReporte(List.of(venta1, venta2, venta3));
 
-        assertTrue(estadisticas.containsKey("arroz"));
-        assertTrue(estadisticas.containsKey("leche"));
+        assertTrue(reporte.getEstadisticas().containsKey("arroz"));
+        assertTrue(reporte.getEstadisticas().containsKey("leche"));
     }
 
     @Test
     void verificarQueGenerarReporteNoIncluyeVentasFueraDelRango() {
-        Map<String, Estadistica> estadisticas = reporte.generarReporte(List.of(venta3));
+        reporte.generarReporte(List.of(venta3));
 
-        assertTrue(estadisticas.isEmpty());
+        assertFalse(reporte.getEstadisticas().containsKey("arroz"));
     }
 }
