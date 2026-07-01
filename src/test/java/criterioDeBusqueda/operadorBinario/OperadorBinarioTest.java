@@ -1,6 +1,9 @@
 package criterioDeBusqueda.operadorBinario;
 
 import criterioDeBusqueda.*;
+import criterioDeBusqueda.criterioSimple.CriterioPorDisponibilidad;
+import criterioDeBusqueda.criterioSimple.CriterioPorNombre;
+import criterioDeBusqueda.criterioSimple.CriterioPorPrecioMax;
 import item.Item;
 import item.Producto;
 import org.junit.jupiter.api.BeforeEach;
