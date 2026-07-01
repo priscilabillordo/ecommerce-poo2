@@ -1,5 +1,6 @@
 package criterioDeBusqueda;
 
+import criterioDeBusqueda.criterioSimple.CriterioPorPrecioMax;
 import item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
