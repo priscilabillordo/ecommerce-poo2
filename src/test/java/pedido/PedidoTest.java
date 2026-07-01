@@ -82,7 +82,7 @@ public class PedidoTest {
     }
 
     @Test
-    void seSetteaUnPedidoCorrectamente() {
+    void seSeteaUnPedidoCorrectamente() {
         unPedido.setEstado(otroEstado);
         unPedido.setMetodoDeEnvio(otroMetodoDeEnvio);
         unPedido.setMedioDePago(otroMedioDePago);
@@ -162,18 +162,19 @@ public class PedidoTest {
 
     @Test
     void seCalculaElCostoFinalDeUnPedido(){
+        unPedido.agregarItem(unItem);
         double costoDePedido = unPedido.costoTotal();
         verify(unMetodoDeEnvio).costoDeEnvio(unPedido);
-        assertThat(costoDePedido).isEqualTo(2500.0);
+        assertThat(costoDePedido).isEqualTo(4500.0);
     }
 
     @Test
-    void seCalculaElCostoTotalDelPedido() {
+    void seCalculaElCostoDeEnvioDeUnPedido() {
         unPedido.agregarItem(unItem);
-        double total = unPedido.costoTotal();
 
+        double total = unPedido.costoDeEnvio();
         verify(unMetodoDeEnvio).costoDeEnvio(unPedido);
-        assertThat(total).isEqualTo(4500.0);
+        assertThat(total).isEqualTo(2500.0);
     }
 
     @Test
