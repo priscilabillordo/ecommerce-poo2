@@ -1,11 +1,14 @@
 package item;
 
+import exceptions.ItemException;
+import exceptions.PedidoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -68,6 +71,7 @@ public class PaqueteTest {
                 "sin productos",
                 0
         );
+
     }
 
     @Test
@@ -107,4 +111,5 @@ public class PaqueteTest {
         paquete.aumentarStock();
         assertEquals(3, paquete.getStock());
     }
+
 }
