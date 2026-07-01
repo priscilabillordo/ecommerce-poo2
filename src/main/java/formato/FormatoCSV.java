@@ -1,15 +1,17 @@
 package formato;
 
+import lombok.Getter;
 import reporte.Reporte;
 import reporte.ReporteProductosMasVendidos;
 
+@Getter
 public class FormatoCSV implements Formato {
     private String estadoDeNegocio;
 
     @Override
     public void visitar(ReporteProductosMasVendidos reporte) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Item | Cantidad | Precio promedio\n");
+        sb.append("Producto,Cantidad,PrecioPromedio\n");
 
         reporte.getEstadisticas().forEach((clave, valor) -> {
             sb.append(clave)
