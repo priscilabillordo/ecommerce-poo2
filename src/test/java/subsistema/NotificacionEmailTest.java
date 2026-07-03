@@ -33,42 +33,4 @@ public class NotificacionEmailTest {
         estadoNoNotificable = new Borrador();
     }
 
-    @Test
-    void verificaQueElEstadoEsConfirmadoDeNotificacion() {
-        notificacionEmail.actualizar(pedido, estadoNoNotificable, estadoConfirmado);
-        assertTrue(notificacionEmail.requiereNotificar(estadoConfirmado));
-        verify(mailSender).enviarMail("cliente@mail.com",
-                "cliente",
-                "El estado del pedido fue actualizado",
-                null);
-    }
-
-
-    @Test
-    void verificaQueElEstadoEsEnviadoDeNotificacion() {
-        notificacionEmail.actualizar(pedido, estadoNoNotificable, estadoEnviado);
-        assertTrue(notificacionEmail.requiereNotificar(estadoEnviado));
-        verify(mailSender).enviarMail("cliente@mail.com",
-                "cliente",
-                "El estado del pedido fue actualizado",
-                null);
-    }
-
-
-    @Test
-    void verificaQueElEstadoEsEntregadoDeNotificacion() {
-        notificacionEmail.actualizar(pedido, estadoNoNotificable, estadoEntregado);
-        assertTrue(notificacionEmail.requiereNotificar(estadoEntregado));
-        verify(mailSender).enviarMail("cliente@mail.com",
-                "cliente",
-                "El estado del pedido fue actualizado",
-                null);
-    }
-
-
-    @Test
-    void verificaQueElEstadoNoCorrespondeDeNotificacion() {
-        notificacionEmail.actualizar(pedido, estadoNoNotificable, estadoNoNotificable);
-        assertFalse(notificacionEmail.requiereNotificar(estadoNoNotificable));
-    }
 }

@@ -15,7 +15,10 @@ public class NotificacionEmail implements Subsistema {
 
     @Override
     public void actualizar(Pedido pedido, EstadoPedido estadoAnterior, EstadoPedido estadoNuevo) {
-        if (this.requiereNotificar(estadoNuevo)){
+    /*
+    * Cuando se actualiza un pedido, el estado sabe responder si su estado es "notificable" para Mail
+    * */
+        if (estadoNuevo.mandaMail()){
             mailSender.enviarMail("cliente@mail.com",
                     "cliente",
                     "El estado del pedido fue actualizado",
@@ -23,10 +26,4 @@ public class NotificacionEmail implements Subsistema {
         }
     }
 
-    @Override
-    public boolean requiereNotificar(EstadoPedido estado) {
-        return  estado instanceof Confirmado ||
-                estado instanceof Enviado    ||
-                estado instanceof Entregado;
-    }
 }

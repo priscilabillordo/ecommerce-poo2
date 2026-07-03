@@ -39,4 +39,18 @@ public abstract class EstadoPedido {
         throw new PedidoException("Operación inválida: El pedido no puede ser entregado");
     }
 
+
+    public boolean mandaMail(){
+        return false;
+    }
+
+    public boolean generaComprobante(){
+        return false;
+    }
+
+    public boolean generaCupon(){
+        return false;
+
+    }
+
 }

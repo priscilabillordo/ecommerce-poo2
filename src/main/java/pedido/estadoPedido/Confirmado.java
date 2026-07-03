@@ -15,4 +15,9 @@ public class Confirmado extends EstadoPedido {
         pedido.reponerStock();
     }
 
+    @Override
+    public boolean mandaMail(){
+        return true;
+    }
+
 }

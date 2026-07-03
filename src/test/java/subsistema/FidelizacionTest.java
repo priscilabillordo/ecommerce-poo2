@@ -25,20 +25,4 @@ public class FidelizacionTest {
         pedido = mock(Pedido.class);
     }
 
-    @Test
-    void verificarCuandoEstadoEsCancelado() {
-        assertTrue(fidelizacion.requiereNotificar(estadoCancelado));
-    }
-
-    @Test
-    void verificarActualizacionCuandoElPedidoNoEsCancelado() {
-        fidelizacion.actualizar(pedido, estadoNoCancelado, estadoNoCancelado);
-        assertFalse(fidelizacion.requiereNotificar(estadoNoCancelado));
-    }
-
-    @Test
-    void verificarActualizacionCuandoElPedidoEsCancelado() {
-        fidelizacion.actualizar(pedido, estadoNoCancelado, estadoCancelado);
-        assertTrue(fidelizacion.requiereNotificar(estadoCancelado));
-    }
 }

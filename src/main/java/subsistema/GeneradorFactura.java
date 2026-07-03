@@ -9,14 +9,9 @@ import java.time.LocalDate;
 public class GeneradorFactura implements Subsistema {
     @Override
     public void actualizar(Pedido pedido, EstadoPedido estadoAnterior, EstadoPedido estadoNuevo) {
-        if (this.requiereNotificar(estadoNuevo)) {
+        if (estadoNuevo.generaComprobante()) {
             this.generarComprobante("cliente@mail.com", pedido.getFecha() , pedido.costoTotal());
         }
-    }
-
-    @Override
-    public boolean requiereNotificar(EstadoPedido estado) {
-        return estado instanceof Entregado;
     }
 
     private void generarComprobante(String emailCliente, LocalDate fecha, double total) {

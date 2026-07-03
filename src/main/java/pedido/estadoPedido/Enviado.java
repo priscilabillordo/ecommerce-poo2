@@ -20,4 +20,9 @@ public class Enviado extends EstadoPedido {
         pedido.setEstado(new Entregado());
         pedido.registrarVenta(new Venta(pedido));
     }
+
+    @Override
+    public boolean mandaMail(){
+        return true;
+    }
 }

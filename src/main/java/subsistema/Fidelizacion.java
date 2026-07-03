@@ -8,14 +8,9 @@ import pedido.estadoPedido.EstadoPedido;
 public class Fidelizacion implements Subsistema {
     @Override
     public void actualizar(Pedido pedido, EstadoPedido estadoAnterior, EstadoPedido estadoNuevo) {
-        if (this.requiereNotificar(estadoNuevo)) {
+        if (estadoNuevo.generaCupon()) {
             this.envioMensaje("cliente@mail.com");
         }
-    }
-
-    @Override
-    public boolean requiereNotificar(EstadoPedido estado) {
-        return estado instanceof Cancelado;
     }
 
     private void envioMensaje(String emailCliente) {

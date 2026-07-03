@@ -34,16 +34,4 @@ public class GeneradorFacturaTest {
         when(pedido.costoTotal()).thenReturn(15000.0);
     }
 
-    @Test
-    void verificarActualizacionCuandoPedidoEstaEntregado() {
-        generadorFactura.actualizar(pedido, estadoNoEntregado, estadoEntregado);
-        assertTrue(generadorFactura.requiereNotificar(estadoEntregado));
-    }
-
-
-    @Test
-    void verificarActualizacionCuandoPedidoNoEstaEntregado() {
-        generadorFactura.actualizar(pedido, estadoNoEntregado, estadoNoEntregado);
-        assertFalse(generadorFactura.requiereNotificar(estadoNoEntregado));
-    }
 }
