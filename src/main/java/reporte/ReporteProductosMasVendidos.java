@@ -22,22 +22,21 @@ public class ReporteProductosMasVendidos implements Reporte {
         this.estadisticas = new HashMap<>();
     }
 
+
     @Override
-    public void visitar(Venta venta) {
+    public Reporte generarReporte(List<Venta> ventas) {
+        ventas.stream()
+                .filter(v -> !v.fueEntre(this.fechaInicio, this.fechaFin))
+                .forEach(v -> this.crearEstadisticas(v));
+        return this;
+    }
+
+    private void crearEstadisticas(Venta venta) {
         for (Item item : venta.getItems()) {
             //calcula e inserta un valor para una clave específica
             Estadistica estadistica = estadisticas.computeIfAbsent(item.getNombre(), n -> new Estadistica());
             estadistica.acumular(item.getPrecioFinal());
         }
-    }
-
-    @Override
-    public Reporte generarReporte(List<Venta> ventas) {
-        ventas.stream()
-                .filter(v -> !v.getFecha().isBefore(this.fechaInicio) && !v.getFecha().isAfter(this.fechaFin))
-                .forEach(v -> v.accept(this));
-
-        return this;
     }
 
     @Override
