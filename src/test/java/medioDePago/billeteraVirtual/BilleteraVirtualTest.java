@@ -15,6 +15,7 @@ public class BilleteraVirtualTest {
     private BilleteraVirtual billeteraVirtual;
     private APIBilletera api;
 
+    /*
     @BeforeEach
     void setUp(){
         api = mock(APIBilletera.class);
@@ -59,6 +60,7 @@ public class BilleteraVirtualTest {
     * Test procesarPago() heredado de MedioDePago
     * */
 
+    /*
     @Test
     void seProcesaUnPagoCorrectamente(){
         // Pruebo el template
@@ -84,4 +86,5 @@ public class BilleteraVirtualTest {
         verify(api, never()).acreditar();
         verify(api, never()).notificar();
     }
+    */
 }

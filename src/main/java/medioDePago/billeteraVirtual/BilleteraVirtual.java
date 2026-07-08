@@ -3,6 +3,7 @@ package medioDePago.billeteraVirtual;
 import exceptions.MedioDePagoException;
 import lombok.Getter;
 import medioDePago.MedioDePago;
+import pedido.Pedido;
 
 @Getter
 public class BilleteraVirtual extends MedioDePago {
@@ -30,7 +31,7 @@ public class BilleteraVirtual extends MedioDePago {
     }
 
     @Override
-    public void notificarResultado() {
-        this.api.notificar();
+    public void notificarResultado(Pedido pedido) {
+        this.api.notificar(pedido);
     }
 }

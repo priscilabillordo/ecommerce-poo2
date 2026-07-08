@@ -14,4 +14,9 @@ public class EnvioExpress implements MetodoDeEnvio {
         float precio = (float) pedido.costoDeItems();
         return (double) envioExpressI.calcularCosto(precio);
     }
+
+    @Override
+    public int estimacionDeDias(Pedido pedido) {
+        return 1;
+    }
 }
