@@ -6,7 +6,6 @@ import venta.Venta;
 import java.util.List;
 
 public interface Reporte {
-    void visitar(Venta venta);
 
     Reporte generarReporte(List<Venta> ventas);
 

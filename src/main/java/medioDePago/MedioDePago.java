@@ -27,6 +27,7 @@ public abstract class MedioDePago {
         pedido.registrarTransaccion(this.codigoTransaccion);
     }
 
+
     /*
     * Metodos abstractos que cada medio de pago implementa
     * */

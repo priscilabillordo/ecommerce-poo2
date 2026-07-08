@@ -37,10 +37,4 @@ public class VentaTest {
         assertEquals(List.of(item), venta.getItems());
     }
 
-    @Test
-    void verificarQueSeAceptaUnReporte() {
-        venta.accept(reporte);
-
-        verify(reporte).visitar(venta);
-    }
 }

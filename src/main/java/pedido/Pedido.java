@@ -29,7 +29,7 @@ public class Pedido {
      private EstadoPedido estado;
      private MetodoDeEnvio metodoDeEnvio;
      private MedioDePago medioDePago;
-
+     private String codigoTransaccion;
      private LocalDate fecha;
 
     public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio, EcommerceData data){
@@ -93,6 +93,10 @@ public class Pedido {
 
     public void cancelar(){
         this.estado.cancelarPedido(this);
+    }
+
+    public void registrarTransaccion(String codigoTransaccion) {
+        this.codigoTransaccion = codigoTransaccion;
     }
 
 

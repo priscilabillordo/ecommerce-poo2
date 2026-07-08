@@ -140,7 +140,7 @@ public class PedidoTest {
     void seConfirmaUnPedidoCuandoSuPagoFueProcesado(){
         unPedido.confirmar();
 
-        verify(unMedioDePago).procesarPago();
+        verify(unMedioDePago).procesarPago(unPedido);
         assertThat(unPedido.getEstado()).isInstanceOf(Confirmado.class);
     }
 
