@@ -9,16 +9,22 @@ import java.util.UUID;
 public abstract class MedioDePago {
 
     private String codigoTransaccion;
-    /*
-    * Cada instancia de MedioDePago guarda un codigo de transaccion que es generado
-    * cuando un pago es exitoso
-    * */
 
     public final void procesarPago(Pedido pedido){
-        this.validarDatos();
-        this.reservarFondos();
-        this.ejecutarTransaccion();
-        this.notificarResultado(pedido);
+            this.validarDatos();
+            this.reservarFondos();
+            this.ejecutarTransaccion();
+            this.notificarResultado(pedido);
+    }
+
+    protected void generarCodigoTransaccion(){
+        this.codigoTransaccion = UUID.randomUUID().toString();
+    }
+
+
+    public void notificarResultado(Pedido pedido){
+        this.generarCodigoTransaccion();
+        pedido.registrarTransaccion(this.codigoTransaccion);
     }
 
     public void notificarResultado(Pedido pedido){

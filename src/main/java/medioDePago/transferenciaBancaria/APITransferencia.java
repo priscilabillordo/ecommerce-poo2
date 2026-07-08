@@ -6,5 +6,4 @@ public interface APITransferencia {
 
     void validarCuenta() throws MedioDePagoException;
     void transferir();
-    void generarComprobante();
 }

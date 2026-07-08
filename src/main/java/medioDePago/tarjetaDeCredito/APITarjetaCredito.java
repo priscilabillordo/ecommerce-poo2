@@ -7,5 +7,4 @@ public interface APITarjetaCredito {
     void validarTarjeta() throws MedioDePagoException;
     void preautorizar();
     void transferir();
-    void generarCupon();
 }

@@ -1,12 +1,11 @@
 package medioDePago.tarjetaDeCredito;
 
 public class CuponDePago {
-
     private String ultimosNumerosTarjeta;
-    private String codigoTransaccion;
+    private String codigo;
 
-    public CuponDePago(String ultimosNumerosTarjeta, String codigoTransaccion){
+    public CuponDePago(String ultimosNumerosTarjeta, String codigo){
         this.ultimosNumerosTarjeta = ultimosNumerosTarjeta;
-        this.codigoTransaccion = codigoTransaccion;
+        this.codigo = codigo;
     }
 }

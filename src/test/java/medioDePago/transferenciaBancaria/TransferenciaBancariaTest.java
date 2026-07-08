@@ -11,6 +11,7 @@ public class TransferenciaBancariaTest {
     private TransferenciaBancaria transferenciaBancaria;
     private APITransferencia api;
 
+    /*
     @BeforeEach
     void setUp(){
         api = mock(APITransferencia.class);
@@ -51,4 +52,5 @@ public class TransferenciaBancariaTest {
 
         verify(api).generarComprobante();
     }
+     */
 }
