@@ -6,6 +6,7 @@ import item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pedido.Pedido;
+import subsistema.Subsistema;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.isA;
@@ -16,15 +17,24 @@ public class EnviadoTest {
 
     private Enviado estadoEnviado;
     private Pedido unPedido;
+    private Subsistema unSubsistema;
     private Item unItem;
 
     @BeforeEach
     void setUp(){
         // Mocks
+        unSubsistema = mock(Subsistema.class);
         unPedido = mock(Pedido.class);
         unItem = mock(Item.class);
         // SUT Enviado
         estadoEnviado = new Enviado();
+    }
+
+    @Test
+    void seNotificaCambiarAEnviado() {
+        estadoEnviado.notificar(unPedido, unSubsistema);
+
+        verify(unSubsistema).cambioAEnviado(unPedido);
     }
 
     @Test

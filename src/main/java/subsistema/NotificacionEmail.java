@@ -13,20 +13,28 @@ public class NotificacionEmail implements Subsistema {
         this.mailSender = mailSender;
     }
 
-    @Override
-    public void actualizar(Pedido pedido, EstadoPedido estadoAnterior, EstadoPedido estadoNuevo) {
-        if (this.requiereNotificar(estadoNuevo)){
-            mailSender.enviarMail("cliente@mail.com",
-                    "cliente",
-                    "El estado del pedido fue actualizado",
-                    null);
-        }
+    private void mandarMail(String cambioDeEstado) {
+        mailSender.enviarMail("cliente@mail.com",
+                "cliente",
+                "El pedido fue " + cambioDeEstado,
+                null);
     }
 
     @Override
-    public boolean requiereNotificar(EstadoPedido estado) {
-        return  estado instanceof Confirmado ||
-                estado instanceof Enviado    ||
-                estado instanceof Entregado;
+    public void cambioAConfirmado(Pedido pedido) {
+        this.mandarMail("confirmado");
     }
+
+    @Override
+    public void cambioAEnviado(Pedido pedido) {
+        this.mandarMail("enviado");
+    }
+
+    @Override
+    public void cambioAEntregado(Pedido pedido) {
+        this.mandarMail("entregado");
+    }
+
+    @Override
+    public void cambioACancelado(Pedido pedido) { }
 }

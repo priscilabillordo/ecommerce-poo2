@@ -7,22 +7,23 @@ import pedido.estadoPedido.EstadoPedido;
 import java.time.LocalDate;
 
 public class GeneradorFactura implements Subsistema {
-    @Override
-    public void actualizar(Pedido pedido, EstadoPedido estadoAnterior, EstadoPedido estadoNuevo) {
-        if (this.requiereNotificar(estadoNuevo)) {
-            this.generarComprobante("cliente@mail.com", pedido.getFecha() , pedido.costoTotal());
-        }
+    private ComprobanteFiscal comprobanteFiscal;
+
+    public GeneradorFactura(ComprobanteFiscal comprobanteFiscal) {
+        this.comprobanteFiscal = comprobanteFiscal;
     }
 
     @Override
-    public boolean requiereNotificar(EstadoPedido estado) {
-        return estado instanceof Entregado;
+    public void cambioAEntregado(Pedido pedido) {
+        this.comprobanteFiscal.generarComprobante(pedido);
     }
 
-    private void generarComprobante(String emailCliente, LocalDate fecha, double total) {
-        System.out.printf(
-                "Cliente: %s%nFecha: %s%nTotal: %.2f%n",
-                emailCliente, fecha, total
-        );
-    }
+    @Override
+    public void cambioAEnviado(Pedido pedido) { }
+
+    @Override
+    public void cambioACancelado(Pedido pedido) { }
+
+    @Override
+    public void cambioAConfirmado(Pedido pedido) { }
 }

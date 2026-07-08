@@ -5,6 +5,7 @@ import item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pedido.Pedido;
+import subsistema.Subsistema;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
@@ -39,6 +40,13 @@ public class BorradorTest {
     void seVerificaQueUnPedidoBorradorPuedeQuitarItems(){
         estadoBorrador.quitarItem(unItem, unPedido);
         verify(unPedido).deleteItem(unItem);
+    }
+
+    @Test
+    void notificarPorDefectoNoHaceNada() {
+        Subsistema unSubsistema = mock(Subsistema.class);
+        estadoBorrador.notificar(unPedido, unSubsistema);
+        verifyNoInteractions(unSubsistema);
     }
 
     @Test

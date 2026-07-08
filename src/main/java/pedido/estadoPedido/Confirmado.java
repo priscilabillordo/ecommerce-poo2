@@ -1,6 +1,7 @@
 package pedido.estadoPedido;
 
 import pedido.Pedido;
+import subsistema.Subsistema;
 
 public class Confirmado extends EstadoPedido {
 
@@ -13,6 +14,11 @@ public class Confirmado extends EstadoPedido {
     public void cancelarPedido(Pedido pedido){
         pedido.setEstado(new Cancelado());
         pedido.reponerStock();
+    }
+
+    @Override
+    public void notificar(Pedido pedido, Subsistema subsistema) {
+        subsistema.cambioAConfirmado(pedido);
     }
 
 }

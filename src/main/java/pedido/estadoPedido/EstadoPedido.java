@@ -4,6 +4,7 @@ package pedido.estadoPedido;
 import exceptions.PedidoException;
 import item.Item;
 import pedido.Pedido;
+import subsistema.Subsistema;
 
 public abstract class EstadoPedido {
 
@@ -38,5 +39,7 @@ public abstract class EstadoPedido {
         // Solo lo hace Enviado
         throw new PedidoException("Operación inválida: El pedido no puede ser entregado");
     }
+
+    public void notificar(Pedido pedido, Subsistema subsistema) { }
 
 }
