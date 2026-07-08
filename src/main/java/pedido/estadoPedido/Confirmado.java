@@ -1,6 +1,7 @@
 package pedido.estadoPedido;
 
 import pedido.Pedido;
+import subsistema.Subsistema;
 
 public class Confirmado extends EstadoPedido {
 
@@ -16,8 +17,8 @@ public class Confirmado extends EstadoPedido {
     }
 
     @Override
-    public boolean mandaMail(){
-        return true;
+    public void notificar(Pedido pedido, Subsistema subsistema) {
+        subsistema.cambioAConfirmado(pedido);
     }
 
 }

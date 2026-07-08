@@ -1,16 +1,16 @@
 package pedido.estadoPedido;
 
+import pedido.Pedido;
+import subsistema.Subsistema;
+
 public class Entregado extends EstadoPedido {
 
     public Entregado(){
         super();
     }
 
-    public boolean mandaMail(){
-        return true;
-    }
-
-    public boolean generaComprobante(){
-        return true;
+    @Override
+    public void notificar(Pedido pedido, Subsistema subsistema) {
+        subsistema.cambioAEntregado(pedido);
     }
 }

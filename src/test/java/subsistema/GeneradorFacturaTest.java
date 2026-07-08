@@ -12,18 +12,20 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class GeneradorFacturaTest {
-    private GeneradorFactura generadorFactura;
+    private GeneradorFactura  generadorFactura;
+    private ComprobanteFiscal comprobanteFiscal;
     private EstadoPedido estadoEntregado;
     private EstadoPedido estadoNoEntregado;
     private Pedido pedido;
 
+
     @BeforeEach
     void setUp() {
-        generadorFactura  = new GeneradorFactura();
+        comprobanteFiscal = mock(ComprobanteFiscal.class);
+        generadorFactura  = new GeneradorFactura(comprobanteFiscal);
         estadoEntregado   = new Entregado();
         estadoNoEntregado = new Enviado();
 
@@ -34,4 +36,28 @@ public class GeneradorFacturaTest {
         when(pedido.costoTotal()).thenReturn(15000.0);
     }
 
+    @Test
+    void verifcarQueSeGeneraComprobanteFiscal() {
+        generadorFactura.cambioAEntregado(pedido);
+
+        verify(comprobanteFiscal).generarComprobante(pedido);
+    }
+
+    @Test
+    void noSeGeneraComprobanteCuandoElPedidoSeEnvia() {
+        generadorFactura.cambioAEnviado(pedido);
+        verifyNoInteractions(comprobanteFiscal);
+    }
+
+    @Test
+    void noSeGeneraComprobanteCuandoElPedidoSeCancela() {
+        generadorFactura.cambioACancelado(pedido);
+        verifyNoInteractions(comprobanteFiscal);
+    }
+
+    @Test
+    void noSeGeneraComprobanteCuandoElPedidoSeConfirma() {
+        generadorFactura.cambioAConfirmado(pedido);
+        verifyNoInteractions(comprobanteFiscal);
+    }
 }

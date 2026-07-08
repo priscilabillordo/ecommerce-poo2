@@ -6,17 +6,24 @@ import pedido.estadoPedido.Entregado;
 import pedido.estadoPedido.EstadoPedido;
 
 public class Fidelizacion implements Subsistema {
-    @Override
-    public void actualizar(Pedido pedido, EstadoPedido estadoAnterior, EstadoPedido estadoNuevo) {
-        if (estadoNuevo.generaCupon()) {
-            this.envioMensaje("cliente@mail.com");
-        }
+    private final Cupon cupon;
+
+    public Fidelizacion(Cupon cupon) {
+        this.cupon = cupon;
     }
 
-    private void envioMensaje(String emailCliente) {
-        System.out.printf(
-                "Cliente %s: tiene un cupón de descuento del 5 porciento",
-                emailCliente
-        );
+    @Override
+    public void cambioACancelado(Pedido pedido) {
+        this.cupon.generarCupon(pedido);
     }
+
+    @Override
+    public void cambioAEnviado(Pedido pedido) { }
+
+    @Override
+    public void cambioAEntregado(Pedido pedido) { }
+
+    @Override
+    public void cambioAConfirmado(Pedido pedido) { }
+
 }

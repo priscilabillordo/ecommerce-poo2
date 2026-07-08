@@ -5,18 +5,22 @@ import item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pedido.Pedido;
+import subsistema.Subsistema;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class EntregadoTest {
 
     private Pedido unPedido;
+    private Subsistema unSubsistema;
     private Entregado estadoEntregado;
     private Item unItem;
 
     @BeforeEach
     void setUp(){
+        unSubsistema = mock(Subsistema.class);
         unPedido = mock(Pedido.class);
         unItem = mock(Item.class);
         estadoEntregado = new Entregado();
@@ -26,6 +30,13 @@ public class EntregadoTest {
      * Tests operaciones inválidas
      * Un pedido en estado Entregado no debería poder hacer ninguna operación
      * */
+
+    @Test
+    void seNotificaCambiarAEntregado() {
+        estadoEntregado.notificar(unPedido, unSubsistema);
+
+        verify(unSubsistema).cambioAEntregado(unPedido);
+    }
 
     @Test
     void noEsPosibleAgregarUnItemEnUnPedidoEntregado(){

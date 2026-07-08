@@ -7,8 +7,7 @@ import pedido.estadoPedido.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class NotificacionEmailTest {
     private NotificacionEmail notificacionEmail;
@@ -33,4 +32,43 @@ public class NotificacionEmailTest {
         estadoNoNotificable = new Borrador();
     }
 
+    @Test
+    void vefircarQueSeMandaUnMailCuandoCambioAConfirmado() {
+        notificacionEmail.cambioAConfirmado(pedido);
+
+        verify(mailSender).enviarMail(
+                "cliente@mail.com",
+                "cliente",
+                "El pedido fue confirmado",
+                null);
+    }
+
+    @Test
+    void vefircarQueSeMandaUnMailCuandoCambioAEnviado() {
+        notificacionEmail.cambioAEnviado(pedido);
+
+        verify(mailSender).enviarMail(
+                "cliente@mail.com",
+                "cliente",
+                "El pedido fue enviado",
+                null);
+    }
+
+    @Test
+    void vefircarQueSeMandaUnMailCuandoCambioAEntregado() {
+        notificacionEmail.cambioAEntregado(pedido);
+
+        verify(mailSender).enviarMail(
+                "cliente@mail.com",
+                "cliente",
+                "El pedido fue entregado",
+                null);
+    }
+
+    @Test
+    void noSeEnviaMailCuandoElPedidoSeCancela() {
+        notificacionEmail.cambioACancelado(pedido);
+
+        verifyNoInteractions(mailSender);
+    }
 }

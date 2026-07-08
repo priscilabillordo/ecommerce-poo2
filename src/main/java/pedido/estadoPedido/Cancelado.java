@@ -1,12 +1,16 @@
 package pedido.estadoPedido;
 
+import pedido.Pedido;
+import subsistema.Subsistema;
+
 public class Cancelado extends EstadoPedido {
 
     public Cancelado() {
         super();
     }
 
-    public boolean generaCupon(){
-        return true;
+    @Override
+    public void notificar(Pedido pedido, Subsistema subsistema) {
+        subsistema.cambioACancelado(pedido);
     }
 }
