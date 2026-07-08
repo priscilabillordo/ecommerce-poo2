@@ -27,9 +27,6 @@ public abstract class MedioDePago {
         pedido.registrarTransaccion(this.codigoTransaccion);
     }
 
-    public void notificarResultado(Pedido pedido){
-        this.codigoTransaccion = this.generarCodigo();
-    }
 
     protected String generarCodigo(){
         return UUID.randomUUID().toString();
