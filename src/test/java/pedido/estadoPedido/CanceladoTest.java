@@ -5,19 +5,22 @@ import item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pedido.Pedido;
+import subsistema.Subsistema;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class CanceladoTest {
-
     private Pedido unPedido;
+    private Subsistema unSubsistema;
     private Cancelado estadoCancelado;
     private Item unItem;
 
     @BeforeEach
     void setUp(){
         unPedido = mock(Pedido.class);
+        unSubsistema = mock(Subsistema.class);
         unItem = mock(Item.class);
         estadoCancelado = new Cancelado();
     }
@@ -27,6 +30,13 @@ public class CanceladoTest {
      * Tests operaciones inválidas
      * Un pedido en estado Cancelado no debería poder hacer ninguna operación
      * */
+    @Test
+    void seNotificaCambiarACancelado() {
+        estadoCancelado.notificar(unPedido, unSubsistema);
+
+        verify(unSubsistema).cambioACancelado(unPedido);
+    }
+
     @Test
     void noEsPosibleAgregarUnItemEnUnPedidoCancelado(){
         assertThatThrownBy(() -> estadoCancelado.cargarItem(unItem, unPedido))

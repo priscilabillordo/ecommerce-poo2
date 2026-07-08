@@ -7,8 +7,7 @@ import pedido.estadoPedido.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class NotificacionEmailTest {
     private NotificacionEmail notificacionEmail;
@@ -34,41 +33,42 @@ public class NotificacionEmailTest {
     }
 
     @Test
-    void verificaQueElEstadoEsConfirmadoDeNotificacion() {
-        notificacionEmail.actualizar(pedido, estadoNoNotificable, estadoConfirmado);
-        assertTrue(notificacionEmail.requiereNotificar(estadoConfirmado));
-        verify(mailSender).enviarMail("cliente@mail.com",
+    void vefircarQueSeMandaUnMailCuandoCambioAConfirmado() {
+        notificacionEmail.cambioAConfirmado(pedido);
+
+        verify(mailSender).enviarMail(
+                "cliente@mail.com",
                 "cliente",
-                "El estado del pedido fue actualizado",
+                "El pedido fue confirmado",
                 null);
     }
 
-
     @Test
-    void verificaQueElEstadoEsEnviadoDeNotificacion() {
-        notificacionEmail.actualizar(pedido, estadoNoNotificable, estadoEnviado);
-        assertTrue(notificacionEmail.requiereNotificar(estadoEnviado));
-        verify(mailSender).enviarMail("cliente@mail.com",
+    void vefircarQueSeMandaUnMailCuandoCambioAEnviado() {
+        notificacionEmail.cambioAEnviado(pedido);
+
+        verify(mailSender).enviarMail(
+                "cliente@mail.com",
                 "cliente",
-                "El estado del pedido fue actualizado",
+                "El pedido fue enviado",
                 null);
     }
 
-
     @Test
-    void verificaQueElEstadoEsEntregadoDeNotificacion() {
-        notificacionEmail.actualizar(pedido, estadoNoNotificable, estadoEntregado);
-        assertTrue(notificacionEmail.requiereNotificar(estadoEntregado));
-        verify(mailSender).enviarMail("cliente@mail.com",
+    void vefircarQueSeMandaUnMailCuandoCambioAEntregado() {
+        notificacionEmail.cambioAEntregado(pedido);
+
+        verify(mailSender).enviarMail(
+                "cliente@mail.com",
                 "cliente",
-                "El estado del pedido fue actualizado",
+                "El pedido fue entregado",
                 null);
     }
 
-
     @Test
-    void verificaQueElEstadoNoCorrespondeDeNotificacion() {
-        notificacionEmail.actualizar(pedido, estadoNoNotificable, estadoNoNotificable);
-        assertFalse(notificacionEmail.requiereNotificar(estadoNoNotificable));
+    void noSeEnviaMailCuandoElPedidoSeCancela() {
+        notificacionEmail.cambioACancelado(pedido);
+
+        verifyNoInteractions(mailSender);
     }
 }

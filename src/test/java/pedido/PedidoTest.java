@@ -212,14 +212,12 @@ public class PedidoTest {
     }
 
     @Test
-    void cuandoCambiaElEstadoSeNotificaALosSubsistemas() {
+    void verificarQueSeNotificaUnCambioEstado() {
         unPedido.addSubsistema(unSubsistema);
-        EstadoPedido estadoAnterior = unPedido.getEstado();
-        unPedido.setEstado(otroEstado);
+        unPedido.setEstado(unEstado);
 
-        verify(unSubsistema).actualizar(unPedido, estadoAnterior, otroEstado);
+        verify(unEstado).notificar(unPedido, unSubsistema);
     }
-
 
     @Test
     void verificarQueSeRegistraUnaVentaCorrectamente() {

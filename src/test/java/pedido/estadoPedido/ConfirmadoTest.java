@@ -5,6 +5,7 @@ import item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pedido.Pedido;
+import subsistema.Subsistema;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.isA;
@@ -15,10 +16,12 @@ public class ConfirmadoTest {
 
     private Confirmado estadoConfirmado;
     private Pedido unPedido;
+    private Subsistema unSubsistema;
     private Item unItem;
 
     @BeforeEach
     void setUp(){
+        unSubsistema = mock(Subsistema.class);
         unPedido = mock(Pedido.class);
         unItem = mock(Item.class);
         estadoConfirmado = new Confirmado();
@@ -28,6 +31,13 @@ public class ConfirmadoTest {
     void sePreparaUnPedidoConfirmadoCorrectamente(){
         estadoConfirmado.prepararPedido(unPedido);
         verify(unPedido).setEstado(isA(EnPreparacion.class));
+    }
+
+    @Test
+    void seNotificaCambiarAConfimado() {
+        estadoConfirmado.notificar(unPedido, unSubsistema);
+
+        verify(unSubsistema).cambioAConfirmado(unPedido);
     }
 
     @Test

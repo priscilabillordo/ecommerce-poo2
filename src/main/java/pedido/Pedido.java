@@ -71,13 +71,12 @@ public class Pedido {
     }
 
     public void setEstado(EstadoPedido estado) {
-        EstadoPedido estadoAnterior = this.getEstado();
         this.estado = estado;
-        notificar(this, estadoAnterior, estado);
+        notificar();
     }
 
-    public void notificar(Pedido pedido, EstadoPedido estadoAnterior, EstadoPedido estadoNuevo) {
-        this.subsistemas.stream().forEach(s -> s.actualizar(pedido, estadoAnterior, estadoNuevo));
+    public void notificar() {
+        this.subsistemas.stream().forEach(s -> this.estado.notificar(this, s));
     }
 
     public void preparar(){
