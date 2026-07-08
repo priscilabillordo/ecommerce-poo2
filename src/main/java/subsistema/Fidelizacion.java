@@ -1,9 +1,6 @@
 package subsistema;
 
 import pedido.Pedido;
-import pedido.estadoPedido.Cancelado;
-import pedido.estadoPedido.Entregado;
-import pedido.estadoPedido.EstadoPedido;
 
 public class Fidelizacion implements Subsistema {
     private final Cupon cupon;

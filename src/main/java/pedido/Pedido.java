@@ -66,7 +66,7 @@ public class Pedido {
     }
 
     public void confirmar() {
-        this.medioDePago.procesarPago();
+        this.medioDePago.procesarPago(this);
         this.estado.confirmarPedido(this);
     }
 

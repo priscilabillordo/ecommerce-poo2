@@ -4,7 +4,11 @@ import pedido.Pedido;
 import pedido.estadoPedido.EstadoPedido;
 
 public interface Subsistema {
-    void actualizar(Pedido pedido, EstadoPedido estadoAnterior, EstadoPedido estadoNuevo);
+    void cambioAEntregado(Pedido pedido);
 
-    boolean requiereNotificar(EstadoPedido estado);
+    void cambioAEnviado(Pedido pedido);
+
+    void cambioACancelado(Pedido pedido);
+
+    void cambioAConfirmado(Pedido pedido);
 }
