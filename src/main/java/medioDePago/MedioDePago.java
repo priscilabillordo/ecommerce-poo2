@@ -28,12 +28,6 @@ public abstract class MedioDePago {
     }
 
 
-    protected String generarCodigo(){
-        return UUID.randomUUID().toString();
-        // Genera un codigo aleatorio
-    }
-
-
     /*
     * Metodos abstractos que cada medio de pago implementa
     * */
