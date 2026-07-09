@@ -5,7 +5,9 @@ import ecommerce.NotaDeCredito;
 import exceptions.MedioDePagoException;
 import exceptions.PedidoException;
 import item.Item;
+import medioDePago.ComprobantePago;
 import medioDePago.MedioDePago;
+import medioDePago.tarjetaDeCredito.CuponDePago;
 import metodoDeEnvio.MetodoDeEnvio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -78,7 +80,9 @@ public class PedidoTest {
         assertThat(unPedido.getMedioDePago()).isEqualTo(unMedioDePago);
         assertThat(unPedido.getMetodoDeEnvio()).isEqualTo(unMetodoDeEnvio);
         assertThat(unPedido.getData()).isEqualTo(unData);
-        assertEquals(null, unPedido.getFecha());
+        assertNull(unPedido.getFecha());
+        assertNull(unPedido.getComprobante());
+
     }
 
     @Test
@@ -221,10 +225,16 @@ public class PedidoTest {
 
     @Test
     void verificarQueSeRegistraUnaVentaCorrectamente() {
-
         unPedido.registrarVenta(unaVenta);
-
         verify(unData).agregarVenta(unaVenta);
+    }
+
+    @Test
+    void verificarQueSeRegistraUnaTransaccion() {
+        ComprobantePago unComprobante = mock(CuponDePago.class);
+
+        unPedido.registrarTransaccion(unComprobante);
+        assertEquals(unComprobante, unPedido.getComprobante());
     }
 
     // Tests delegacion al estado de un Pedido

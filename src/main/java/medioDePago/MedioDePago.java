@@ -7,7 +7,6 @@ import java.util.UUID;
 
 @Getter
 public abstract class MedioDePago {
-
     private String codigoTransaccion;
 
     public final void procesarPago(Pedido pedido){
@@ -22,11 +21,9 @@ public abstract class MedioDePago {
     }
 
 
-    public void notificarResultado(Pedido pedido){
+    public void notificarResultado(Pedido pedido) {
         this.generarCodigoTransaccion();
-        pedido.registrarTransaccion(this.codigoTransaccion);
     }
-
 
     /*
     * Metodos abstractos que cada medio de pago implementa

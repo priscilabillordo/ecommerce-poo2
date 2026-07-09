@@ -2,6 +2,7 @@ package medioDePago.transferenciaBancaria;
 
 import exceptions.MedioDePagoException;
 import lombok.Getter;
+import medioDePago.ComprobantePago;
 import medioDePago.MedioDePago;
 import pedido.Pedido;
 
@@ -10,7 +11,6 @@ public class TransferenciaBancaria extends MedioDePago {
 
     private String cbu, alias;
     private APITransferencia api;
-    private ComprobanteCBU comprobanteCBU;
 
     public TransferenciaBancaria(String cbu, String alias, APITransferencia api){
         this.cbu = cbu;
@@ -35,6 +35,8 @@ public class TransferenciaBancaria extends MedioDePago {
     @Override
     public void notificarResultado(Pedido pedido) {
         super.notificarResultado(pedido);
-        this.comprobanteCBU = new ComprobanteCBU(this.getCodigoTransaccion(), this.cbu);
+        ComprobantePago comprobanteCBU = new ComprobanteCBU(this.cbu, this.getCodigoTransaccion());
+
+        pedido.registrarTransaccion(comprobanteCBU); //se lo doy al pedido para que él se encargue de guardarlo
     }
 }

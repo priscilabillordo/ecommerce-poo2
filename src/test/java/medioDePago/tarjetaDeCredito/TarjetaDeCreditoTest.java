@@ -55,7 +55,6 @@ public class TarjetaDeCreditoTest {
     @Test
     void cuandoSeNotificaElResultadoDeUnaTransaccionSeGeneraUnCupon(){
         tarjeta.notificarResultado(unPedido);
-
-        assertThat(tarjeta.getCupon()).isInstanceOf(CuponDePago.class);
+        verify(unPedido).registrarTransaccion(any(CuponDePago.class));
     }
 }

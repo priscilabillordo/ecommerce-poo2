@@ -1,11 +1,12 @@
 package medioDePago.tarjetaDeCredito;
 
-public class CuponDePago {
+import medioDePago.ComprobantePago;
+
+public class CuponDePago extends ComprobantePago {
     private String ultimosNumerosTarjeta;
-    private String codigo;
 
     public CuponDePago(String ultimosNumerosTarjeta, String codigo){
+        super(codigo);
         this.ultimosNumerosTarjeta = ultimosNumerosTarjeta;
-        this.codigo = codigo;
     }
 }

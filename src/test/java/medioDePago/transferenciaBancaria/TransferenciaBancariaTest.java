@@ -1,7 +1,9 @@
 package medioDePago.transferenciaBancaria;
 
+import medioDePago.tarjetaDeCredito.CuponDePago;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pedido.Pedido;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -10,11 +12,13 @@ public class TransferenciaBancariaTest {
 
     private TransferenciaBancaria transferenciaBancaria;
     private APITransferencia api;
+    private Pedido pedido;
 
-    /*
+
     @BeforeEach
     void setUp(){
-        api = mock(APITransferencia.class);
+        pedido = mock(Pedido.class);
+        api    = mock(APITransferencia.class);
         transferenciaBancaria = new TransferenciaBancaria("1234567891011121314151","priscilaCuenta", api);
     }
 
@@ -48,9 +52,7 @@ public class TransferenciaBancariaTest {
 
     @Test
     void seGeneraUnComprobanteAlNotificarLaTransferencia(){
-        transferenciaBancaria.notificarResultado();
-
-        verify(api).generarComprobante();
+        transferenciaBancaria.notificarResultado(pedido);
+        verify(pedido).registrarTransaccion(any(ComprobanteCBU.class));
     }
-     */
 }

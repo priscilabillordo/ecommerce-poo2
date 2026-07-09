@@ -6,6 +6,7 @@ import exceptions.PedidoException;
 import item.Item;
 import lombok.Getter;
 import lombok.Setter;
+import medioDePago.ComprobantePago;
 import medioDePago.MedioDePago;
 import metodoDeEnvio.MetodoDeEnvio;
 import pedido.estadoPedido.Borrador;
@@ -28,18 +29,19 @@ public class Pedido {
      private EstadoPedido estado;
      private MetodoDeEnvio metodoDeEnvio;
      private MedioDePago medioDePago;
-     //private String codigoTransaccion;
+     private ComprobantePago comprobante;
      private LocalDate fecha;
 
     public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio, EcommerceData data){
         this.subsistemas = new ArrayList<>();
-        this.items = new ArrayList<>();
-        this.direccionEntrega = direccionEntrega;
-        this.medioDePago = medioDePago;
-        this.metodoDeEnvio = metodoDeEnvio;
-        this.data = data;
+        this.items  = new ArrayList<>();
         this.estado = new Borrador();
+        this.direccionEntrega = direccionEntrega;
+        this.medioDePago   = medioDePago;
+        this.metodoDeEnvio = metodoDeEnvio;
+        this.comprobante = null;
         this.fecha = null;
+        this.data  = data;
     }
 
     public double peso(){
@@ -94,11 +96,9 @@ public class Pedido {
         this.estado.cancelarPedido(this);
     }
 
-    public void registrarTransaccion(String codigoTransaccion) {
-        //this.codigoTransaccion = codigoTransaccion;
-
+    public void registrarTransaccion(ComprobantePago comprobante) {
+        this.comprobante = comprobante;
     }
-
 
     // Metodos que son llamados por los estados, el cliente no accede a estos
     public void addItem(Item item) {

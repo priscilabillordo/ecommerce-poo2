@@ -1,12 +1,12 @@
 package medioDePago.transferenciaBancaria;
 
-public class ComprobanteCBU {
+import medioDePago.ComprobantePago;
 
-    private String nroOperacion;
+public class ComprobanteCBU extends ComprobantePago {
     private String cbu;
 
-    public ComprobanteCBU(String nroOperacion, String cbu){
-        this.nroOperacion = nroOperacion;
+    public ComprobanteCBU(String cbu, String codigo) {
+        super(codigo);
         this.cbu = cbu;
     }
 }
