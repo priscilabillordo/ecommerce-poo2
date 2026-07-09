@@ -19,7 +19,7 @@ public class Venta {
         this.items = pedido.getItems();
     }
 
-    public boolean fueEntre(LocalDate fechaInicio, LocalDate fechaFin) {
-        return this.getFecha().isBefore(fechaInicio) && !this.getFecha().isAfter(fechaFin);
+    public boolean ocurrioEntre(LocalDate fechaInicio, LocalDate fechaFin) {
+        return !this.getFecha().isBefore(fechaInicio) && !this.getFecha().isAfter(fechaFin);
     }
 }

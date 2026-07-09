@@ -81,11 +81,11 @@ class ReporteProductosMasVendidosTest {
         assertTrue(reporte.getEstadisticas().containsKey("arroz"));
         assertTrue(reporte.getEstadisticas().containsKey("leche"));
     }
-/*
+
     @Test
     void verificarQueGenerarReporteNoIncluyeVentasFueraDelRango() {
         reporte.generarReporte(List.of(venta3));
 
         assertFalse(reporte.getEstadisticas().containsKey("arroz"));
-    }*/
+    }
 }

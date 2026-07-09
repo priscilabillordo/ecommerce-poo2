@@ -22,25 +22,26 @@ public class ReporteProductosMasVendidos implements Reporte {
         this.estadisticas = new HashMap<>();
     }
 
+    @Override
+    public void accept(Formato formato) {
+        formato.visitar(this);
+    }
 
     @Override
     public Reporte generarReporte(List<Venta> ventas) {
         ventas.stream()
-                .filter(v -> !v.fueEntre(this.fechaInicio, this.fechaFin))
-                .forEach(v -> this.crearEstadisticas(v));
+                .filter(v -> v.ocurrioEntre(this.fechaInicio, this.fechaFin))
+                .forEach(this::crearEstadisticas);
         return this;
     }
 
     private void crearEstadisticas(Venta venta) {
-        for (Item item : venta.getItems()) {
-            //calcula e inserta un valor para una clave específica
-            Estadistica estadistica = estadisticas.computeIfAbsent(item.getNombre(), n -> new Estadistica());
-            estadistica.acumular(item.getPrecioFinal());
-        }
+        venta.getItems().forEach(this::registrarItem);
     }
 
-    @Override
-    public void accept(Formato formato) {
-        formato.visitar(this);
+    private void registrarItem(Item item) {
+        //calcula e inserta un valor para una clave específica
+        Estadistica estadistica = estadisticas.computeIfAbsent(item.getNombre(), n -> new Estadistica());
+        estadistica.acumular(item.getPrecioFinal());
     }
 }
