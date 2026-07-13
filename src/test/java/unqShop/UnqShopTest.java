@@ -91,4 +91,6 @@ public class UnqShopTest {
         verify(data).getNotasDeCredito();
         assertThat(notasDeCredito).isEmpty();
     }
+
+
 }
