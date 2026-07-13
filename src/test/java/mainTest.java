@@ -212,6 +212,7 @@ public class mainTest {
         System.out.println("La cantidad de pedidos es " + unqShop.getPedidos().size());
         System.out.println("La cantidad de ventas es " + unqShop.ventas().size());
         System.out.println("La cantidad de notas de credito es " + unqShop.notasDeCredito().size());
+        System.out.println("El codigo de transaccion del pedido es " + unPedidoEnviado.getCodigoTransaccion());
     }
 
 }
