@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pedido.estadoPedido.Borrador;
 import pedido.estadoPedido.Confirmado;
+import pedido.estadoPedido.EnPreparacion;
 import pedido.estadoPedido.EstadoPedido;
 import subsistema.Subsistema;
 import venta.Venta;
@@ -137,11 +138,12 @@ public class PedidoTest {
     }
 
     @Test
-    void seConfirmaUnPedidoCuandoSuPagoFueProcesado(){
+    void sePreparaUnPedidoCuandoSuPagoFueProcesado(){
         unPedido.confirmar();
+        unPedido.preparar();
 
         verify(unMedioDePago).procesarPago(unPedido);
-        assertThat(unPedido.getEstado()).isInstanceOf(Confirmado.class);
+        assertThat(unPedido.getEstado()).isInstanceOf(EnPreparacion.class);
     }
 
     @Test
