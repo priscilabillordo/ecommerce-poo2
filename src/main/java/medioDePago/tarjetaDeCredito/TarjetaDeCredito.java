@@ -39,8 +39,8 @@ public class TarjetaDeCredito extends MedioDePago {
 
     @Override
     public void notificarResultado(Pedido pedido) {
-        String ultimosNumeros = this.numeroDeTarjeta.substring(this.numeroDeTarjeta.length() - 4);
-        super.notificarResultado(pedido);
-        this.cupon = new CuponDePago(ultimosNumeros, this.getCodigoTransaccion());
+        String ultimosDigitosTarjeta = this.numeroDeTarjeta.substring(this.numeroDeTarjeta.length() - 4);
+        super.notificarResultado(pedido); // Esto es necesario para que se genere el codigo de transaccion
+        this.cupon = new CuponDePago(ultimosDigitosTarjeta, this.getCodigoTransaccion());
     }
 }

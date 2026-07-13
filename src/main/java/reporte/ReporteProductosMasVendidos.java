@@ -23,25 +23,25 @@ public class ReporteProductosMasVendidos implements Reporte {
     }
 
     @Override
-    public void visitar(Venta venta) {
-        for (Item item : venta.getItems()) {
-            //calcula e inserta un valor para una clave específica
-            Estadistica estadistica = estadisticas.computeIfAbsent(item.getNombre(), n -> new Estadistica());
-            estadistica.acumular(item.getPrecioFinal());
-        }
+    public void accept(Formato formato) {
+        formato.visitar(this);
     }
 
     @Override
     public Reporte generarReporte(List<Venta> ventas) {
         ventas.stream()
-                .filter(v -> !v.getFecha().isBefore(this.fechaInicio) && !v.getFecha().isAfter(this.fechaFin))
-                .forEach(v -> v.accept(this));
-
+                .filter(v -> v.ocurrioEntre(this.fechaInicio, this.fechaFin))
+                .forEach(this::crearEstadisticas);
         return this;
     }
 
-    @Override
-    public void accept(Formato formato) {
-        formato.visitar(this);
+    private void crearEstadisticas(Venta venta) {
+        venta.getItems().forEach(this::registrarItem);
+    }
+
+    private void registrarItem(Item item) {
+        //calcula e inserta un valor para una clave específica
+        Estadistica estadistica = estadisticas.computeIfAbsent(item.getNombre(), n -> new Estadistica());
+        estadistica.acumular(item.getPrecioFinal());
     }
 }

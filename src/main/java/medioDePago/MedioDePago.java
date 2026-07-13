@@ -3,7 +3,6 @@ package medioDePago;
 import exceptions.MedioDePagoException;
 import lombok.Getter;
 import pedido.Pedido;
-
 import java.util.UUID;
 
 @Getter
@@ -27,6 +26,11 @@ public abstract class MedioDePago {
         this.generarCodigoTransaccion();
         pedido.registrarTransaccion(this.codigoTransaccion);
     }
+
+
+    /*
+    * Metodos abstractos que cada medio de pago implementa
+    * */
 
     public abstract void validarDatos() throws MedioDePagoException;
     public abstract void reservarFondos();

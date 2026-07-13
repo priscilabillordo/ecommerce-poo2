@@ -26,6 +26,7 @@ public class FormatoCSV implements Formato {
     }
 
     @Override
+    //desde afuera no me importa cuál es
     public String exportar(Reporte reporte) {
         reporte.accept(this);
         return this.estadoDeNegocio;

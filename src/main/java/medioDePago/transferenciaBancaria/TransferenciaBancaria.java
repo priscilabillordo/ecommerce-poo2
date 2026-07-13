@@ -35,6 +35,6 @@ public class TransferenciaBancaria extends MedioDePago {
     @Override
     public void notificarResultado(Pedido pedido) {
         super.notificarResultado(pedido);
-        this.comprobanteCBU = new ComprobanteCBU(this.cbu, this.getCodigoTransaccion());
+        this.comprobanteCBU = new ComprobanteCBU(this.getCodigoTransaccion(), this.cbu);
     }
 }
