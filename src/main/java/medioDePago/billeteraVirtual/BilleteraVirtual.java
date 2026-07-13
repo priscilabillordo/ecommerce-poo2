@@ -32,6 +32,7 @@ public class BilleteraVirtual extends MedioDePago {
 
     @Override
     public void notificarResultado(Pedido pedido) {
+        super.notificarResultado(pedido);
         this.api.notificar(pedido);
     }
 }

@@ -3,6 +3,7 @@ package medioDePago.tarjetaDeCredito;
 import exceptions.MedioDePagoException;
 import lombok.Getter;
 import medioDePago.MedioDePago;
+import medioDePago.comprobanteDePago.CuponDePago;
 import pedido.Pedido;
 
 import java.time.LocalDate;
