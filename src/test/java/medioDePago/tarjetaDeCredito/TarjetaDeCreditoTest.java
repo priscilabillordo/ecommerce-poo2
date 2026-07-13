@@ -1,5 +1,7 @@
 package medioDePago.tarjetaDeCredito;
 
+import exceptions.MedioDePagoException;
+import medioDePago.comprobanteDePago.CuponDePago;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pedido.Pedido;
@@ -8,6 +10,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class TarjetaDeCreditoTest {
@@ -58,4 +61,16 @@ public class TarjetaDeCreditoTest {
 
         assertThat(tarjeta.getCupon()).isInstanceOf(CuponDePago.class);
     }
+
+    @Test
+    void seVerificaQueCuandoUnaTarjetaNoPuedeValidarSusDatos_Falla() {
+        // Configuro el mock para que falle
+        doThrow(new MedioDePagoException("Los datos no son válidos")).when(api).validarTarjeta();
+
+        assertThrows(
+                MedioDePagoException.class,
+                () -> tarjeta.validarDatos()
+        );
+    }
+
 }

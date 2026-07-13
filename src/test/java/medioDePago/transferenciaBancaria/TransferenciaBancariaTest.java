@@ -1,19 +1,24 @@
 package medioDePago.transferenciaBancaria;
 
+import exceptions.MedioDePagoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pedido.Pedido;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class TransferenciaBancariaTest {
 
     private TransferenciaBancaria transferenciaBancaria;
     private APITransferencia api;
+    private Pedido unPedido;
 
-    /*
     @BeforeEach
     void setUp(){
+        unPedido = mock(Pedido.class);
         api = mock(APITransferencia.class);
         transferenciaBancaria = new TransferenciaBancaria("1234567891011121314151","priscilaCuenta", api);
     }
@@ -36,7 +41,7 @@ public class TransferenciaBancariaTest {
     void seReservanLosFondosDeLaCuentaATransferir(){
         transferenciaBancaria.reservarFondos();
 
-        verifyNoInteractions(api); // Porque no hace nada
+        verifyNoInteractions(api);
     }
 
     @Test
@@ -48,9 +53,23 @@ public class TransferenciaBancariaTest {
 
     @Test
     void seGeneraUnComprobanteAlNotificarLaTransferencia(){
-        transferenciaBancaria.notificarResultado();
+        transferenciaBancaria.notificarResultado(unPedido);
 
-        verify(api).generarComprobante();
+        verify(unPedido).registrarTransaccion(anyString());
+        assertThat(transferenciaBancaria.getCodigoTransaccion()).isNotNull();
+        assertThat(transferenciaBancaria.getComprobanteCBU()).isNotNull();
     }
-     */
+
+    @Test
+    void seVerificaQueCuandoUnaTransferenciaNoPuedeValidarSusDatos_Falla() {
+        // Configuro el mock para que falle
+        doThrow(new MedioDePagoException("Los datos no son válidos")).when(api).validarCuenta();
+
+        assertThrows(
+                MedioDePagoException.class,
+                () -> transferenciaBancaria.validarDatos()
+        );
+    }
+
+
 }
