@@ -227,6 +227,13 @@ public class PedidoTest {
         verify(unData).agregarVenta(unaVenta);
     }
 
+    @Test
+    void verificarQueSeRegistraTransaccion() {
+        unPedido.registrarTransaccion("123456789");
+
+        assertEquals("123456789", unPedido.getCodigoTransaccion());
+    }
+
     // Tests delegacion al estado de un Pedido
     @Test
     void seInicializaUnPedidoConEstadoCorrectamente(){

@@ -28,7 +28,7 @@ public class Pedido {
      private EstadoPedido estado;
      private MetodoDeEnvio metodoDeEnvio;
      private MedioDePago medioDePago;
-     //private String codigoTransaccion;
+     private String codigoTransaccion;
      private LocalDate fecha;
 
     public Pedido(String direccionEntrega, MedioDePago medioDePago, MetodoDeEnvio metodoDeEnvio, EcommerceData data){
@@ -65,7 +65,6 @@ public class Pedido {
     }
 
     public void confirmar() {
-        this.medioDePago.procesarPago(this);
         this.estado.confirmarPedido(this);
     }
 
@@ -79,6 +78,7 @@ public class Pedido {
     }
 
     public void preparar(){
+        this.medioDePago.procesarPago(this);
         this.estado.prepararPedido(this);
     }
 
@@ -95,7 +95,7 @@ public class Pedido {
     }
 
     public void registrarTransaccion(String codigoTransaccion) {
-        //this.codigoTransaccion = codigoTransaccion;
+        this.codigoTransaccion = codigoTransaccion;
 
     }
 

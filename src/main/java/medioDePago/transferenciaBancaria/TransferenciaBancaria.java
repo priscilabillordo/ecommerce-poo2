@@ -3,6 +3,7 @@ package medioDePago.transferenciaBancaria;
 import exceptions.MedioDePagoException;
 import lombok.Getter;
 import medioDePago.MedioDePago;
+import medioDePago.comprobanteDePago.ComprobanteCBU;
 import pedido.Pedido;
 
 @Getter
