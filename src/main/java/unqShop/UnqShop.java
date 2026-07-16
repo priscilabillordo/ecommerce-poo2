@@ -6,6 +6,7 @@ import ecommerce.NotaDeCredito;
 import formato.Formato;
 import item.Item;
 import lombok.Getter;
+import metodoDeEnvio.Sucursal;
 import pedido.Pedido;
 import reporte.Reporte;
 import venta.Venta;
@@ -19,11 +20,13 @@ public class UnqShop {
     private List<Pedido> pedidos;
     private List<Item> catalogo;
     private final EcommerceData data;
+    private List<Sucursal> sucursales;
 
     public UnqShop(EcommerceData data){
         this.data = data;
         this.catalogo = new ArrayList<>();
         this.pedidos = new ArrayList<>();
+        this.sucursales = new ArrayList<>();
     }
 
     public void registrarPedido(Pedido pedido){
@@ -51,4 +54,8 @@ public class UnqShop {
         return this.data.getNotasDeCredito();
     }
 
+    public void registrarSucursal(Sucursal s){
+        this.sucursales.add(s);
+        // Esto es para respetar que el sistema posee distintas sucursales
+    }
 }

@@ -5,6 +5,7 @@ import ecommerce.EcommerceData;
 import ecommerce.NotaDeCredito;
 import formato.Formato;
 import item.Item;
+import metodoDeEnvio.Sucursal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pedido.Pedido;
@@ -26,6 +27,7 @@ public class UnqShopTest {
     private Reporte unReporte;
     private Formato unFormato;
     private CriterioDeBusqueda unCriterio;
+    private Sucursal sucursal;
 
     @BeforeEach
     void setUp(){
@@ -38,6 +40,7 @@ public class UnqShopTest {
         unPedido = mock(Pedido.class);
         unReporte = mock(Reporte.class);
         unFormato = mock(Formato.class);
+        sucursal = mock(Sucursal.class);
         when(unReporte.generarReporte(anyList())).thenReturn(unReporte);
         when(unFormato.exportar(unReporte)).thenReturn("Producto,Cantidad,PrecioPromedio");
         unqShop = new UnqShop(data);
@@ -48,6 +51,7 @@ public class UnqShopTest {
         assertThat(unqShop.getCatalogo()).isEmpty();
         assertThat(unqShop.getPedidos()).isEmpty();
         assertThat(unqShop.getData()).isEqualTo(data);
+        assertThat(unqShop.getSucursales()).isEmpty();
     }
 
     @Test
@@ -92,5 +96,10 @@ public class UnqShopTest {
         assertThat(notasDeCredito).isEmpty();
     }
 
+    @Test
+    void seRegistraUnaSucursalEnElEcommerce(){
+        unqShop.registrarSucursal(sucursal);
 
+        assertThat(unqShop.getSucursales()).contains(sucursal);
+    }
 }
