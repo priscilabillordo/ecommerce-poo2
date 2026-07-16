@@ -62,6 +62,7 @@ public class PedidoTest {
         unaVenta = mock(Venta.class);
         unPedido = new Pedido("Roque Saenz Peña 200", unMedioDePago, unMetodoDeEnvio, unData);
         when(unMetodoDeEnvio.costoDeEnvio(unPedido)).thenReturn(2500.0);
+        when(unMetodoDeEnvio.estimacionDeDias(unPedido)).thenReturn(5);
 
         unEstado   = mock(EstadoPedido.class);
         otroEstado = mock(EstadoPedido.class);
@@ -234,6 +235,11 @@ public class PedidoTest {
         unPedido.registrarTransaccion("123456789");
 
         assertEquals("123456789", unPedido.getCodigoTransaccion());
+    }
+
+    @Test
+    void seCalculaLaEstimacionDeDiasDeEntregaDeUnPedido(){
+        assertThat(unPedido.estimacionDeDias()).isEqualTo(5);
     }
 
     // Tests delegacion al estado de un Pedido

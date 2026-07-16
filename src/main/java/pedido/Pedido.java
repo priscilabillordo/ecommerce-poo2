@@ -49,6 +49,7 @@ public class Pedido {
     public double costoTotal()   { return this.costoDeItems() + this.costoDeEnvio(); }
     public double costoDeItems() { return this.items.stream().mapToDouble(Item::getPrecioFinal).sum(); }
     public double costoDeEnvio() { return this.metodoDeEnvio.costoDeEnvio(this); }
+    public int estimacionDeDias() {return this.metodoDeEnvio.estimacionDeDias(this);}
 
     public void agregarItem(Item item) {
         if (!item.hayStock()) {
@@ -98,7 +99,6 @@ public class Pedido {
         this.codigoTransaccion = codigoTransaccion;
 
     }
-
 
     // Metodos que son llamados por los estados, el cliente no accede a estos
     public void addItem(Item item) {
